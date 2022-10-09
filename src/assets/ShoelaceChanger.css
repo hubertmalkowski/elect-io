@@ -1,0 +1,31 @@
+
+
+
+/*Buttons*/
+sl-button[variant="primary"]:not([outline])::part(base) {
+    background-color: var(--Color-Primary-500);
+    transition: background-color 0.2s;
+    border: var(--Color-Primary-500) 1px solid;
+
+}
+sl-button[variant="primary"]:not([outline])::part(base):hover {
+    background-color: var(--Color-Primary-700);
+    border: var(--Color-Primary-500) 1px solid;
+
+}
+
+sl-button[variant="primary"][outline]::part(base) {
+    border: var(--Color-Primary-500) 1px solid;
+    transition: background-color 0.2s, color 0.2s;
+    color: var(--Color-Primary-500);
+}
+sl-button[variant="primary"][outline]::part(base):hover {
+    background-color: var(--Color-Primary-700);
+    color: var(--Background);
+}
+
+
+/*Inputs*/
+sl-input::part(base) {
+    border-radius: 16px;
+}

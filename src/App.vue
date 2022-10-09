@@ -1,6 +1,5 @@
 <script setup lang="ts">
 import {RouterLink, RouterView, useRoute, useRouter} from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
 import {useUser} from "@/stores/user";
 import LoginLayout from "@/layouts/LoginLayout.vue";
 import {ref, watch} from "vue";
@@ -41,8 +40,7 @@ watch(() => route.name, () => {
 
 <template>
 
-  <router-link to="/">yo</router-link><br>
-  <router-link to="/login">pls login</router-link>
+
   <LoginLayout>
     <RouterView />
 
