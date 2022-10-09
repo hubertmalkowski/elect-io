@@ -19,7 +19,10 @@ import {ref} from "vue";
       <sl-input label="Hasło" type="password" required password-toggle></sl-input>
     </div>
     <div class="button-wrap">
-      <sl-button type="submit" size="large" pill variant="primary" outline>Zarejestruj</sl-button>
+      <router-link to="/register">
+        <sl-button type="submit" size="large" pill variant="primary" outline>Zarejestruj</sl-button>
+
+      </router-link>
       <sl-button type="submit" size="large" pill variant="primary" >Zaloguj</sl-button>
     </div>
   </section>
