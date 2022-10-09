@@ -18,18 +18,36 @@ import LoginFormHeader from "@/components/LoginFormHeader.vue";
 <style scoped>
 .loginLayout {
   display: flex;
+  flex-direction: column;
   height: 100vh;
+  padding-inline: 16px;
 }
 
 @media screen and (min-width: 960px) {
-
-  .loginHeader {
-    width: 100%;
+  .loginLayout {
+    flex-direction: row;
+    padding: 0;
   }
-  .slot {
+  .loginHeader {
     width: 100%;
     height: 100%;
   }
+
 }
+
+
+@media screen and (max-width: 959px) {
+  .loginHeader {
+    width: 100%;
+    height: 10%;
+  }
+}
+
+
+.slot {
+  width: 100%;
+  height: 100%;
+}
+
 
 </style>

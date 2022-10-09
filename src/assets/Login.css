@@ -10,6 +10,12 @@
     height: 100%;
 }
 
+@media screen and (min-width: 960px) {
+    .login-form {
+        padding-inline: 16px;
+    }
+}
+
 .login-form .input-wrap {
     display: flex;
     flex-direction: column;
