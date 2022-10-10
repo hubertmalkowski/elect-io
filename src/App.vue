@@ -9,6 +9,7 @@ import {getAuth, onAuthStateChanged} from "firebase/auth"
 import app from "./FirebaseInit"
 
 const auth = getAuth(app)
+auth.useDeviceLanguage();
 
 // const user = useUser()
 

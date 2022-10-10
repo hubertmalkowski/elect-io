@@ -4,13 +4,15 @@ import {initializeApp} from "firebase/app"
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
-  apiKey: "AIzaSyATwUYwyLkUEbCURkIHL5XxgTH8w1soCLk",
-  authDomain: "test1-ad935.firebaseapp.com",
-  projectId: "test1-ad935",
-  storageBucket: "test1-ad935.appspot.com",
-  messagingSenderId: "469258513789",
-  appId: "1:469258513789:web:350bf185127de3fae23014"
+
+  apiKey: "AIzaSyBmBgOyqNhEP9ggtIZboQBwwRB43PeXPlw",
+  authDomain: "elect-io-c43fe.firebaseapp.com",
+  projectId: "elect-io-c43fe",
+  storageBucket: "elect-io-c43fe.appspot.com",
+  messagingSenderId: "866753900826",
+  appId: "1:866753900826:web:6c96ebb07bb55e6bd6bca3"
 };
+
 
 // Initialize Firebase
 export default initializeApp(firebaseConfig)

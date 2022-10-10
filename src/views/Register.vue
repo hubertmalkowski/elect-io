@@ -48,8 +48,9 @@
         <sl-button @click="register" size="large" pill variant="primary" >Zarejestruj</sl-button>
       </div>
 
-      <sl-button>Register with google</sl-button>
-      <sl-button>Register with facebook</sl-button>
+      <!-- not necessary right now -->
+      <!-- <sl-button>Register with google</sl-button> -->
+      <!-- <sl-button>Register with facebook</sl-button> -->
 
     </section>
   <!-- </form> -->
