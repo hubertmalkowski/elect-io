@@ -3,6 +3,7 @@ import {RouterLink, RouterView, useRoute, useRouter} from 'vue-router'
 import {useUser} from "@/stores/user";
 import LoginLayout from "@/layouts/LoginLayout.vue";
 import {ref, watch} from "vue";
+import HomeLayout from "@/layouts/HomeLayout.vue"
 
 const user = useUser()
 
@@ -41,11 +42,15 @@ watch(() => route.name, () => {
 <template>
 
 
-  <LoginLayout>
+  <LoginLayout v-if="layoutMap.get('login')">
     <RouterView />
-
-
   </LoginLayout>
+
+
+  <HomeLayout v-if="layoutMap.get('main')">
+    <RouterView></RouterView>
+  </HomeLayout>
+
 </template>
 
 <style scoped>
