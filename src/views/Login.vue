@@ -50,6 +50,9 @@ function signIn() {
       </router-link>
       <sl-button @click="signIn" size="large" pill variant="primary" >Zaloguj</sl-button>
     </div>
+
+    <sl-button>Register with google</sl-button>
+    <sl-button>Register with facebook</sl-button>
   </section>
   <!-- </form> -->
 
