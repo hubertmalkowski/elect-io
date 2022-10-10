@@ -2,6 +2,7 @@
 import {RouterLink, RouterView, useRoute, useRouter} from 'vue-router'
 import {useUser} from "@/stores/user"
 import LoginLayout from "@/layouts/LoginLayout.vue"
+import HomeLayout from "@/layouts/HomeLayout.vue"
 import {ref, watch} from "vue"
 
 import {getAuth, onAuthStateChanged} from "firebase/auth"
@@ -17,18 +18,20 @@ const auth = getAuth(app)
 const router = useRouter()
 const route = useRoute()
 
-onAuthStateChanged(auth, (user) => {
+onAuthStateChanged(auth, (user : any) => {
   if (user){
     console.log("User logged in! redirecting...");
 
     router.push("/")
   } else {
     console.log("User not logged in! redirecting...");
-
-
     router.push("/login")
   }
 })
+
+
+
+const user = auth.currentUser
 
 //Layout control
 let layoutMap = ref<Map<string, boolean>>(new Map())
