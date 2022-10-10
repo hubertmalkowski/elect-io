@@ -40,7 +40,6 @@
         :creator-name="poll.creator"
         :description="poll.description"
         action-label="głosuj teraz"
-        @action="stuff(poll)"
         class="item"
         :img="image"
       />
@@ -65,30 +64,34 @@ const db = getFirestore(app)
 //create Poll array
 const testPolls = ref<Array<Poll>>([])
 
-//retrieve data
-const querySnapshot = await getDocs(collection(db, "polls"))
-querySnapshot.forEach((doc) => {
-  let data = doc.data()
-  let tempPoll: Poll = {
-    name: data.name,
-    creator: data.creator,
-    description: data.description,
-    options: data.options,
-    expirationDate: data.expirationDate,
-    type: data.type,
-    active: data.active
-  }
+onMounted(async () => {
+  //retrieve data
+  const querySnapshot = await getDocs(collection(db, "polls"))
+  let polls: Array<Poll> = []
+  querySnapshot.forEach((doc) => {
+    let data = doc.data()
+    let tempPoll: Poll = {
+      name: data.name,
+      creator: data.creator,
+      description: data.description,
+      options: data.options,
+      expirationDate: data.expirationDate,
+      type: data.type,
+      active: data.active
+    }
 
-  console.log(tempPoll);
-  
-// push Poll into Poll array
-  testPolls.value.push(tempPoll)
-  console.log(testPolls);
-  
-})
+    console.log(tempPoll);
+    
+    // push Poll into Poll array
+    polls.push(tempPoll)  
+  })
+
+testPolls.value = polls
 // dataFetched.value = true
+})
 
-const loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
+
+
 
 
 const polls = ref<HTMLElement | null>(null)
