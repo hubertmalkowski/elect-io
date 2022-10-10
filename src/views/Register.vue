@@ -8,17 +8,19 @@
   const password1 = ref<string>("")
   const password2 = ref<string>("")
 
+  const username = ref("")
+
   function register() {
     if (password1.value != password2.value) {
       return
     }
     createUserWithEmailAndPassword(getAuth(app), email.value, password1.value)
-      .then((userCredential) => {
+      .then((userCredential : any) => {
         // Signed in 
         const user = userCredential.user;
         // ...
       })
-      .catch((error) => {
+      .catch((error : any) => {
         const errorCode = error.code;
         const errorMessage = error.message;
         // ..
@@ -33,6 +35,7 @@
     <section class="login-form">
 
       <div class="input-wrap">
+        <sl-input v-model="username" label="Nazwa użytkownika" type="email" required></sl-input>
         <sl-input v-model="email" label="Email" type="email" required></sl-input>
         <sl-input v-model="password1" label="Hasło" type="password" required password-toggle></sl-input>
         <sl-input v-model="password2" label="Powtórz hasło" type="password" required password-toggle></sl-input>
