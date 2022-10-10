@@ -1,11 +1,15 @@
 <script setup lang="ts">
 import {RouterLink, RouterView, useRoute, useRouter} from 'vue-router'
-import {useUser} from "@/stores/user";
-import LoginLayout from "@/layouts/LoginLayout.vue";
-import {ref, watch} from "vue";
-import HomeLayout from "@/layouts/HomeLayout.vue"
+import {useUser} from "@/stores/user"
+import LoginLayout from "@/layouts/LoginLayout.vue"
+import {ref, watch} from "vue"
 
-const user = useUser()
+import {getAuth, onAuthStateChanged} from "firebase/auth"
+import app from "./FirebaseInit"
+
+const auth = getAuth(app)
+
+// const user = useUser()
 
 
 
@@ -13,7 +17,18 @@ const user = useUser()
 const router = useRouter()
 const route = useRoute()
 
+onAuthStateChanged(auth, (user) => {
+  if (user){
+    console.log("User logged in! redirecting...");
 
+    router.push("/main")
+  } else {
+    console.log("User not logged in! redirecting...");
+
+
+    router.push("/login")
+  }
+})
 
 //Layout control
 let layoutMap = ref<Map<string, boolean>>(new Map())
