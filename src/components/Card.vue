@@ -1,6 +1,5 @@
 <script lang="ts" setup>
 import '@shoelace-style/shoelace/dist/components/input/input.js';
-import {defineEmits} from "vue";
 
 const props = defineProps({
   img: {
@@ -77,6 +76,9 @@ function action() {
   flex-direction: column;
   border-radius: 12px;
   border: var(--Color-Primary-500) 1px solid;
+  height: fit-content;
+  width: 100%;
+  min-width: 335px;
 }
 
 .headingWrapper {
