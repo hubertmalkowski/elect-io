@@ -12,18 +12,19 @@ const password = ref<string>("")
 const error = ref<string>("")
 
 function signIn() {
+
   signInWithEmailAndPassword(getAuth(app), login.value, password.value)
-  .then((userCredential) => {
+  .then((userCredential : any) => {
     // Signed in 
     const user = userCredential.user;
     // ...
   })
-  .catch((error) => {
+  .catch((error : any) => {
     const errorCode = error.code;
     const errorMessage = error.message;
 
     // console.log(errorMessage);
-    error = errorMessage
+    error.value = errorMessage
   });
 }
 

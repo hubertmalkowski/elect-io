@@ -72,6 +72,7 @@ function action() {
 <style scoped>
 
 .card {
+  overflow: hidden;
   display: flex;
   flex-direction: column;
   border-radius: 12px;
@@ -99,7 +100,7 @@ function action() {
 div img {
   width: 100%;
   object-fit: cover;
-  border-radius: 12px 12px 0 0;
+  /*border-radius: 12px 12px 0 0;*/
 }
 .imageWrapper {
   padding: 0 !important;
