@@ -21,7 +21,7 @@ onAuthStateChanged(auth, (user) => {
   if (user){
     console.log("User logged in! redirecting...");
 
-    router.push("/main")
+    router.push("/")
   } else {
     console.log("User not logged in! redirecting...");
 

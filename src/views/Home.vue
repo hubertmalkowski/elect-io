@@ -16,9 +16,6 @@
 
 import Card from "@/components/Card.vue";
 
-
-
-
 const loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
 
 
