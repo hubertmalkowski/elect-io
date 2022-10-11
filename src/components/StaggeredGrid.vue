@@ -43,11 +43,17 @@ onMounted(() => {
 <style scoped>
 
 .column {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+  margin-inline: 20px ;
 
 }
+
+
 .staggered-grid {
   display: flex;
-  gap: 40px;
+  justify-content: space-between;
 }
 
 

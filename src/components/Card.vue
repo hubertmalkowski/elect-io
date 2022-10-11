@@ -78,7 +78,6 @@ function action() {
   border: var(--Color-Primary-500) 1px solid;
   height: fit-content;
   width: 100%;
-  min-width: 335px;
 }
 
 .headingWrapper {

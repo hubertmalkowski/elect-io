@@ -1,6 +1,8 @@
 <template>
   <div>
-    <slot/>
+    <desktop>
+      <slot/>
+    </desktop>
   </div>
 
 </template>
@@ -8,6 +10,7 @@
 <script setup lang="ts">
 
 import {onMounted, ref} from "vue";
+import Desktop from "@/layouts/homeResponsive/desktop.vue";
 
 const mobile = ref<boolean>(false)
 mobile.value = ifMobile()
