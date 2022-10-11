@@ -37,7 +37,7 @@ const router = createRouter({
       component: Settings
     },
     {
-      path: '/poll-detail',
+      path: '/poll-detail/:id',
       name: 'poll-detail',
       component: PollDetail
     }

@@ -1,9 +1,10 @@
 import type {Option} from "@/types/option";
 
 export interface Poll {
-
+    pollID: string,
     name: string,
     creator: string,
+    creatorUID: string,
 
     description: string,
 
