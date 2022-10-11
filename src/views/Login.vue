@@ -1,7 +1,7 @@
 <script lang="ts" setup>
 import '@shoelace-style/shoelace/dist/components/button/button.js';
 import '@shoelace-style/shoelace/dist/components/input/input.js';
-import {ref} from "vue";
+import {onMounted, ref} from "vue";
 
 import app from "../FirebaseInit"
 import {getAuth, signInWithEmailAndPassword, GoogleAuthProvider, signInWithPopup, signInWithRedirect} from "firebase/auth";
@@ -47,6 +47,18 @@ function signInWithGoogle() {
   })
 }
 
+const form = ref<HTMLElement | null>(null)
+
+onMounted(() => {
+
+
+  form.value!.onsubmit = (event) => {
+    event.preventDefault()
+    signIn()
+  }
+})
+
+
 </script>
 
 
@@ -56,7 +68,7 @@ function signInWithGoogle() {
 <!-- @TODO
     make form not submit with a button
 -->
-<!-- <form class="form"> -->
+<form class="form" ref="form">
   <section class="login-form">
     <div class="input-wrap">
       <sl-input v-model="login" label="Email" type="email" required></sl-input>
@@ -73,7 +85,7 @@ function signInWithGoogle() {
     <sl-button @click="signInWithGoogle">Sign in with google</sl-button>
     <!-- <sl-button>Register with facebook</sl-button> -->
   </section>
-  <!-- </form> -->
+</form>
 
 
 </template>

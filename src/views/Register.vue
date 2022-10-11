@@ -1,5 +1,5 @@
 <script setup lang="ts">
-  import { ref } from "vue";
+  import { onMounted, ref } from "vue";
 
   import app from "../FirebaseInit";
   import { getAuth, createUserWithEmailAndPassword } from "firebase/auth";
@@ -27,10 +27,19 @@
       });
   }
 
+  const form = ref<HTMLElement | null>(null)
+
+  onMounted(() => {
+    form.value!.onsubmit = (event) => {
+      event.preventDefault()
+      register()
+    }
+  })
+
 </script>
 
 <template>
-  <!-- <form class="form"> -->
+  <form class="form" ref="form">
 
     <section class="login-form">
 
@@ -53,7 +62,7 @@
       <!-- <sl-button>Register with facebook</sl-button> -->
 
     </section>
-  <!-- </form> -->
+  </form>
 
 
 </template>
