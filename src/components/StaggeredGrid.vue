@@ -34,10 +34,10 @@ onUpdated(() => {
     Array.from(children).forEach(
         (child, index) => {
           if (index % 2 == 0) {
-            divSecond.append(child)
+            div.append(child)
           }
           else  {
-            div.append(child)
+            divSecond.append(child)
           }
         }
     )
@@ -72,6 +72,10 @@ onUpdated(() => {
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+
+sl-spinner {
+  --indicator-color: var(--Color-Primary-500);
 }
 
 
