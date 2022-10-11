@@ -17,35 +17,59 @@ const props = defineProps( {
   }
 })
 
+let keepChildren : Array<ChildNode>
+
+
 onUpdated(() => {
   if (props.stagger) {
-    const children = grid.value!.childNodes
 
-    const columnItems = new Array<Node>()
+    enableStagger()
 
-
-    const div = document.createElement('div')
-    div.classList.add("column")
-
-    const divSecond = document.createElement('div')
-    divSecond.classList.add("column")
-
-
-    Array.from(children).forEach(
-        (child, index) => {
-          if (index % 2 == 0) {
-            div.append(child)
-          }
-          else  {
-            divSecond.append(child)
-          }
-        }
-    )
-    grid.value!.append(div)
-    grid.value!.append(divSecond)
+  }
+  else {
+    if (keepChildren) {
+      disableStagger()
+    }
   }
 
 })
+
+function enableStagger() {
+  const children = grid.value!.childNodes
+
+  const columnItems = new Array<Node>()
+
+
+  const div = document.createElement('div')
+  div.classList.add("column")
+
+  const divSecond = document.createElement('div')
+  divSecond.classList.add("column")
+
+
+  keepChildren = Array.from(children)
+
+  Array.from(children).forEach(
+      (child, index) => {
+        if (index % 2 == 0) {
+          div.append(child)
+        }
+        else  {
+          divSecond.append(child)
+        }
+      }
+  )
+  grid.value!.append(div)
+  grid.value!.append(divSecond)
+}
+
+
+function disableStagger() {
+  while (grid.value!.firstChild) {
+    grid.value!.removeChild(grid.value!.firstChild);
+  }
+}
+
 
 
 

@@ -2,8 +2,7 @@
   <div class="layout">
 
     <div class="heading">
-      <router-link to="/">Home</router-link><br>
-      <router-link to="/my-polls">My polls</router-link>
+      <Navigation></Navigation>
     </div>
     <div class="router">
       <slot></slot>
@@ -18,6 +17,7 @@
 <script lang="ts" setup>
 
 import Sidebar from "@/components/Sidebar.vue";
+import Navigation from "@/components/Navigation.vue";
 </script>
 
 <style scoped>
@@ -34,6 +34,12 @@ import Sidebar from "@/components/Sidebar.vue";
 
 .sidebar {
   grid-column: 7 / 9;
+}
+
+.heading {
+  height: 100vh;
+  grid-column-start: 1;
+  grid-column-end: 3  ;
 }
 
 
