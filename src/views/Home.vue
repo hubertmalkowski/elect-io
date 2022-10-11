@@ -1,7 +1,7 @@
 <template>
 
   <div class="polls" ref="polls">
-    <StaggeredGrid>
+    <StaggeredGrid :stagger="stagger">
       <div class="" v-for="poll in testPolls">
         <Card
             :heading="poll.name"
@@ -21,15 +21,15 @@
 <script setup lang="ts">
 
 import Card from "@/components/Card.vue";
-import {onMounted, ref} from "vue";
+import {onMounted, ref, watch} from "vue";
 
 import type { Poll } from "@/types/poll";
 import { getAllPolls } from "@/queries/getAllPolls"
 import StaggeredGrid from "@/components/StaggeredGrid.vue";
 
 
-//create Poll array
 const testPolls = ref<Array<Poll>>([])
+const stagger = ref<Boolean>(false)
 
 onMounted(async () => {
   //retrieve data
@@ -38,18 +38,16 @@ onMounted(async () => {
   })
 })
 
+watch(testPolls, (oldTestPolls, newTestPolls) => {
+  stagger.value = newTestPolls !== [];
+})
 
 
 
 
-const polls = ref<HTMLElement | null>(null)
 
 const image = "https://wio.waw.pl/static/files/gallery/8/1107884_1606493893.jpg"
 
-
-function stuff(poll: any) {
-  console.log(poll)
-}
 
 
 </script>

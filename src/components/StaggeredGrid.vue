@@ -1,17 +1,25 @@
 <template>
-  <section ref="grid" class="staggered-grid">
-    <slot></slot>
+  <section ref="grid" class="staggered-grid" :class="{loader : !stagger}">
+    <slot v-if="stagger"></slot>
+    <sl-spinner v-else style="font-size: 4rem"></sl-spinner>
   </section>
 </template>
 
 <script setup lang="ts">
-import {onMounted, ref} from "vue";
+import {defineProps, onMounted, onUpdated, ref} from "vue";
 
 const grid = ref<HTMLElement | null>(null)
 
-onMounted(() => {
+const props = defineProps( {
+  stagger: {
+    type: Boolean,
+    default: false
+  }
+})
 
-  const children = grid.value!.childNodes
+onUpdated(() => {
+  if (props.stagger) {
+    const children = grid.value!.childNodes
 
     const columnItems = new Array<Node>()
 
@@ -22,21 +30,25 @@ onMounted(() => {
     const divSecond = document.createElement('div')
     divSecond.classList.add("column")
 
-    console.log(children)
 
-  Array.from(children).forEach(
-      (child, index) => {
-        if (index % 2 == 0) {
-          divSecond.append(child)
+    Array.from(children).forEach(
+        (child, index) => {
+          if (index % 2 == 0) {
+            divSecond.append(child)
+          }
+          else  {
+            div.append(child)
+          }
         }
-        else  {
-          div.append(child)
-        }
-      }
-  )
-  grid.value!.append(div)
-  grid.value!.append(divSecond)
+    )
+    grid.value!.append(div)
+    grid.value!.append(divSecond)
+  }
+
 })
+
+
+
 
 </script>
 
@@ -47,14 +59,22 @@ onMounted(() => {
   flex-direction: column;
   gap: 40px;
   margin-inline: 20px ;
-
+}
+.loader {
+  margin-top: 50%;
+  display: flex;
+  justify-content: center !important;
+  align-items: center !important;
 }
 
 
 .staggered-grid {
+  width: 100%;
   display: flex;
   justify-content: space-between;
 }
+
+
 
 
 </style>

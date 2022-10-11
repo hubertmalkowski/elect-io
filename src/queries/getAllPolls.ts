@@ -20,10 +20,8 @@ export async function getAllPolls() {
       active: data.active
     }
 
-    console.log(tempPoll);
-    
     // push Poll into Poll array
-    polls.push(tempPoll)  
+    polls.push(tempPoll)
   })
 
   return polls;
