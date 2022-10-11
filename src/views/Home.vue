@@ -2,7 +2,49 @@
   <div class="polls" ref="polls">
 
     <StaggeredGrid>
-      <div class="" v-for="i in 10">
+      <div class="">
+        <Card
+            heading="Wybory na miss zsmeie"
+            creator-name="ZSMEIE TORUŃ"
+            :description="loremIpsum"
+            action-label="głosuj teraz"
+            @action="stuff"
+            class="item"
+        />
+      </div>
+      <div class="">
+        <Card
+            heading="Wybory na miss zsmeie"
+            creator-name="ZSMEIE TORUŃ"
+            :description="loremIpsum"
+            action-label="głosuj teraz"
+            @action="stuff"
+            class="item"
+            :img="image"
+        />
+      </div>
+      <div class="">
+        <Card
+            heading="Wybory na miss zsmeie"
+            creator-name="ZSMEIE TORUŃ"
+            :description="loremIpsum"
+            action-label="głosuj teraz"
+            @action="stuff"
+            class="item"
+            :img="image"
+        />
+      </div>
+      <div class="">
+        <Card
+            heading="Wybory na miss zsmeie"
+            creator-name="ZSMEIE TORUŃ"
+            :description="loremIpsum"
+            action-label="głosuj teraz"
+            @action="stuff"
+            class="item"
+        />
+      </div>
+      <div class="">
         <Card
             heading="Wybory na miss zsmeie"
             creator-name="ZSMEIE TORUŃ"
