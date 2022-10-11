@@ -11,3 +11,9 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
+.column {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+    width: 48%;
+}

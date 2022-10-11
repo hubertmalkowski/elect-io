@@ -1,5 +1,10 @@
 <template>
   <div class="layout">
+
+    <div class="heading">
+      <router-link to="/">Home</router-link><br>
+      <router-link to="/my-polls">My polls</router-link>
+    </div>
     <div class="router">
       <slot></slot>
     </div>
