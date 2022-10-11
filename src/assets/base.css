@@ -50,4 +50,10 @@
   --gray-1: #333333;
 }
 
+.column {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
 

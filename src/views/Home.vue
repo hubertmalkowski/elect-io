@@ -1,7 +1,7 @@
 <template>
   <div class="polls" ref="polls">
-    <div class="flex-polls">
 
+    <StaggeredGrid>
       <div class="" v-for="i in 10">
         <Card
             heading="Wybory na miss zsmeie"
@@ -13,21 +13,7 @@
             :img="image"
         />
       </div>
-    </div>
-    <div class="flex-polls">
-
-      <div class="" v-for="i in 10">
-        <Card
-            heading="Wybory na miss zsmeie"
-            creator-name="ZSMEIE TORUŃ"
-            :description="loremIpsum"
-            action-label="głosuj teraz"
-            @action="stuff"
-            class="item"
-            :img="image"
-        />
-      </div>
-    </div>
+    </StaggeredGrid>
 
   </div>
 
@@ -37,6 +23,7 @@
 
 import Card from "@/components/Card.vue";
 import {onMounted, ref} from "vue";
+import StaggeredGrid from "@/components/StaggeredGrid.vue";
 
 const loremIpsum = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor"
 
