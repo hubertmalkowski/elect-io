@@ -7,7 +7,7 @@
           <span class="material-symbols-outlined">
             dashboard
           </span>
-          <div class="subtitle-1">Orders</div>
+          <div class="subtitle-1">Sondaże</div>
         </div>
       </router-link>
       <router-link to="/my-polls" class="link">

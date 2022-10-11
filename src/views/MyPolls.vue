@@ -8,6 +8,7 @@
             :description="poll.description"
             action-label="podgląd"
             class="item"
+            @action="$router.push('/poll-detail')"
             :img="image"
         />
       </div>
