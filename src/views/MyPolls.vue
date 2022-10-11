@@ -1,14 +1,62 @@
 <template>
-  <div>
-    sex z pedałami
+  <div class="polls">
+    <StaggeredGrid :stagger="stagger">
+      <div class="" v-for="poll in testPolls">
+        <Card
+            :heading="poll.name"
+            :creator-name="poll.creator"
+            :description="poll.description"
+            action-label="podgląd"
+            class="item"
+            :img="image"
+        />
+      </div>
+    </StaggeredGrid>
   </div>
 </template>
 
 <script setup lang="ts">
+  import Card from "@/components/Card.vue";
+  import {onMounted, ref, watch} from "vue";
+
+  import type { Poll } from "@/types/poll";
+  import { getUserPolls } from "@/queries/getUserPolls"
+  import StaggeredGrid from "@/components/StaggeredGrid.vue";
+
+  import app from "../FirebaseInit";
+  import { getAuth } from "@firebase/auth";
+
+  const auth = getAuth(app)
+
+  const testPolls = ref<Array<Poll>>([])
+  const stagger = ref<Boolean>(false)
+
+  onMounted(async () => {
+    //retrieve data
+    const userUID: string | undefined = auth.currentUser?.uid;
+
+    if (userUID != undefined){
+      getUserPolls(userUID).then((polls) => {
+      testPolls.value = polls
+    })
+    }
+  })
+
+  watch(testPolls, (oldTestPolls, newTestPolls) => {
+    stagger.value = newTestPolls !== [];
+  })
+
+
+  const image = "https://wio.waw.pl/static/files/gallery/8/1107884_1606493893.jpg"
+
 
 
 </script>
 
 <style scoped>
-
+.polls {
+  display: flex;
+  flex-direction: row;
+  gap: 40px;
+}
 </style>
