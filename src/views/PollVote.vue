@@ -9,6 +9,7 @@
     import RadioVoting from "../components/RadioVoting.vue";
 
     import type { Option } from "@/types/option"
+    import { addValueToOption } from "@/queries/addValueToOption";
     
     const options = ref<Array<Option>>([
         // {
@@ -43,8 +44,6 @@
         })
 
         getOptionsFromPoll(pollID).then((newOptions) => {
-            console.log(newOptions);
-            
             if(options!=null) {
                 options.value = newOptions
             }
@@ -57,7 +56,7 @@
     onMounted(() => {
         test.value!.onsubmit = (event) => {
             event.preventDefault()
-            console.log(selectedPollID);
+            addValueToOption(selectedPollID, pollID, 1)
         }
     })
 
