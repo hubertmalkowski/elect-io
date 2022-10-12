@@ -28,7 +28,6 @@ function signIn() {
     const errorCode = error.code;
     const errorMessage = error.message;
 
-    console.log(errorMessage);
     error.value = "error"
   });
 }
@@ -37,13 +36,11 @@ function signInWithGoogle() {
   signInWithPopup(auth, googleProvider)
   .then((result) => {
     const credential = GoogleAuthProvider.credentialFromResult(result)
-    console.log(credential);
   })
   .catch((error) => {
     const errorMessage = error.message
 
-    console.log(errorMessage);
-    
+
   })
 }
 

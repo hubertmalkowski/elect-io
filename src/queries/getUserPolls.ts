@@ -23,7 +23,7 @@ export async function getUserPolls(userUID: string) {
     }
 
     // push Poll into Poll array
-    console.log(tempPoll);
+    (tempPoll);
     
     polls.push(tempPoll)
   })

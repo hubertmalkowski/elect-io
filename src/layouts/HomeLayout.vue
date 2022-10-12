@@ -17,8 +17,8 @@ mobile.value = ifMobile()
 onMounted(() => {
 
   window.addEventListener("resize", ()=>{
-    console.log("stuff")
-    console.log(ifMobile())
+    ("stuff")
+    (ifMobile())
     mobile.value = ifMobile()
   })
 })

@@ -21,11 +21,11 @@ const route = useRoute()
 
 onAuthStateChanged(auth, (user : any) => {
   if (user){
-    console.log("User logged in! redirecting...");
+    ("User logged in! redirecting...");
 
     router.push("/")
   } else {
-    console.log("User not logged in! redirecting...");
+    ("User not logged in! redirecting...");
     router.push("/login")
   }
 })

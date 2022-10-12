@@ -1,5 +1,5 @@
 <template>
-  <section ref="grid" class="staggered-grid" :class="{loader : !stagger}">
+  <section ref="grid" class="" :class="{loader : !stagger, 'staggered-grid' : stagger}">
     <slot v-if="stagger"></slot>
     <sl-spinner v-else style="font-size: 4rem"></sl-spinner>
   </section>
@@ -7,6 +7,7 @@
 
 <script setup lang="ts">
 import {defineProps, onMounted, onUpdated, ref} from "vue";
+import {useMobileBreakpoint} from "@/compsables/useMobileBreakpoint";
 
 const grid = ref<HTMLElement | null>(null)
 
@@ -17,57 +18,88 @@ const props = defineProps( {
   }
 })
 
+const inStagger = ref(false)
+
 let keepChildren : Array<ChildNode>
 
 
 onUpdated(() => {
-  if (props.stagger) {
+  if (props.stagger && !inStagger.value && !useMobileBreakpoint(window)) {
 
     enableStagger()
+
+
+    inStagger.value = true
 
   }
   else {
     if (keepChildren) {
       disableStagger()
+      inStagger.value = false
+
     }
   }
 
+
 })
 
+onMounted(() => {
+  window.addEventListener("resize", () => {
+    if (!inStagger.value && !useMobileBreakpoint(window) && props.stagger) {
+      enableStagger()
+      inStagger.value = true
+
+    }
+    else if (inStagger.value && useMobileBreakpoint(window)) {
+      disableStagger()
+      inStagger.value = false
+
+    }
+  })
+})
+
+
+
 function enableStagger() {
-  const children = grid.value!.childNodes
-
+  if (keepChildren == undefined) {
+    const children = grid.value!.childNodes
+    keepChildren = Array.from(children)
+  }
   const columnItems = new Array<Node>()
+  const divs = new Array<HTMLElement>()
+  for (let i = 0; i < 2; i++) {
+    divs.push(document.createElement('div'))
+    divs[i].classList.add("column")
+  }
 
 
-  const div = document.createElement('div')
-  div.classList.add("column")
-
-  const divSecond = document.createElement('div')
-  divSecond.classList.add("column")
-
-
-  keepChildren = Array.from(children)
-
-  Array.from(children).forEach(
+  keepChildren.forEach(
       (child, index) => {
         if (index % 2 == 0) {
-          div.append(child)
+          divs[0].append(child)
         }
         else  {
-          divSecond.append(child)
+          divs[1].append(child)
         }
       }
   )
-  grid.value!.append(div)
-  grid.value!.append(divSecond)
+
+  divs.forEach((column) => {
+    grid.value!.append(column)
+  })
+
+
 }
 
 
 function disableStagger() {
   while (grid.value!.firstChild) {
     grid.value!.removeChild(grid.value!.firstChild);
+
   }
+  keepChildren.forEach((child) => {
+    grid.value!.append(child)
+  })
 }
 
 
@@ -96,6 +128,14 @@ function disableStagger() {
   width: 100%;
   display: flex;
   justify-content: space-between;
+}
+
+@media screen and (max-width: 960px) {
+  .staggered-grid {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 40px;
+  }
 }
 
 sl-spinner {
