@@ -13,18 +13,22 @@
     const creatorName = ref<string>('')
     const description = ref<string>('')
 
-    const currentUser = auth.currentUser!.uid
+    const isPriviliged = ref<boolean>(false)
 
     onMounted(async () => {
+        //@ts-ignore
         let pollID: string = route.params.id
         getPollDetail(pollID).then((poll) => {
         if (poll!=null) {
             heading.value = poll.name
             creatorName.value = poll.creator
             description.value = poll.description
+
+            const currentUser = auth.currentUser!.uid
             if (poll.creatorUID == currentUser){
                 // @TODO
                 // add "edit" button if it's a poll owned by that user
+                isPriviliged.value = true
             }
         }
     })
@@ -50,10 +54,8 @@
                 No description.
             </span>
         </div>
-        <div class="button" v-if="isPriviliged">
-            <sl-button variant="danger" size="large" pill>Edytuj</sl-button>
-        </div>
         <div class="button">
+            <sl-button variant="primary" outline size="large" pill v-if="isPriviliged">Edytuj</sl-button>
             <sl-button variant="primary" size="large" pill>Głosuj</sl-button>
         </div>
     </div>
@@ -77,7 +79,7 @@
         flex-direction: column;
     }
 
-    .headingWrapper.creator {
+    .headingWrapper .creator {
         font-size: 24px;
         line-height: 32px;
     }
@@ -89,7 +91,7 @@
     }
 
     img {
-        max-width: 100%;
+        width: 100%;
         max-height: 15rem;
         object-fit: cover;
         border-radius: 40px;
@@ -107,6 +109,7 @@
     .button {
         display: flex;
         width: 100%;
+        gap: 10px;
         justify-content:  flex-end;
     }
 
