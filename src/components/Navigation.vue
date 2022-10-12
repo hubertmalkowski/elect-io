@@ -30,18 +30,37 @@
 
       <!-- </RouterLink> -->
 
-      <router-link to="/settings">
         <div class="userSetting">
-            <span class="material-symbols-outlined">
+          <sl-dropdown placement="top-end">
+            <span slot="trigger" class="material-symbols-outlined">
               settings
             </span>
+            <sl-menu>
+              <sl-menu-item > <router-link to="/settings">Settings</router-link> </sl-menu-item>
+              <sl-divider></sl-divider>
+              <sl-menu-item @click="signOut(auth)" class="sign-out"> Sign out </sl-menu-item>
+
+
+            </sl-menu>
+          </sl-dropdown>
         </div>
-      </router-link>
     </div>
   </section>
 </template>
 
 <script setup lang="ts">
+
+import '@shoelace-style/shoelace/dist/components/dropdown/dropdown.js';
+import '@shoelace-style/shoelace/dist/components/menu/menu.js';
+import '@shoelace-style/shoelace/dist/components/menu-item/menu-item.js';
+import '@shoelace-style/shoelace/dist/components/divider/divider.js';
+
+import app from '../FirebaseInit'
+
+
+import { signOut, getAuth } from 'firebase/auth'
+const auth = getAuth(app)
+
 
 import {ref} from "vue";
 
@@ -121,6 +140,13 @@ nav {
 .router-link-active .navItem:after {
   width: 100%;
   height: 100%;
+}
+
+sl-menu-item::part(base) {
+  color: var(--Color-Danger-500);
+}
+sl-dropdown::part(base) {
+  cursor: pointer;
 }
 
 

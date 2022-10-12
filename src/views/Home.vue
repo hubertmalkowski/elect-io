@@ -10,7 +10,6 @@
             action-label="głosuj teraz"
             @action="router.push('/poll-detail/' + poll.pollID)"
             class="item"
-            :img="image"
         />
       </div>
     </StaggeredGrid>

@@ -17,8 +17,6 @@ mobile.value = ifMobile()
 onMounted(() => {
 
   window.addEventListener("resize", ()=>{
-    ("stuff")
-    (ifMobile())
     mobile.value = ifMobile()
   })
 })

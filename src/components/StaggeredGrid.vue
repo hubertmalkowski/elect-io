@@ -117,10 +117,11 @@ function disableStagger() {
   margin-inline: 20px ;
 }
 .loader {
-  margin-top: 50%;
+  justify-content: center;
+  width: 100%;
   display: flex;
-  justify-content: center !important;
-  align-items: center !important;
+  height: 40vh;
+  align-items: center;
 }
 
 
