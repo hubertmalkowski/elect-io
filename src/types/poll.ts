@@ -7,9 +7,6 @@ export interface Poll {
     creatorUID: string,
 
     description: string,
-
-    options: Array<Option>,
-
     expirationDate: Date,
 
     //typy bedzie trzeba jeszcze przedyskutować jakie mają być dostępne. Na razie róbmy wszystko typu "basic"

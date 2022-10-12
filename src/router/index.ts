@@ -5,6 +5,7 @@ import  Register from '../views/Register.vue'
 import  MyPolls from '../views/MyPolls.vue'
 import Settings from '../views/Settings.vue'
 import PollDetail from '../views/PollDetail.vue'
+import PollVote from '../views/PollVote.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -40,6 +41,11 @@ const router = createRouter({
       path: '/poll-detail/:id',
       name: 'poll-detail',
       component: PollDetail
+    },
+    {
+      path: '/poll-vote/:id',
+      name: 'poll-vote',
+      component: PollVote
     }
   ]
 })

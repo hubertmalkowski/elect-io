@@ -1,12 +1,13 @@
 <script lang="ts" setup>
-    import { onMounted, ref, watch } from "vue";
-    import { useRoute } from "vue-router";
+    import { onMounted, ref } from "vue";
+    import { useRoute, useRouter } from "vue-router";
     import { getPollDetail } from "@/queries/getPollDetail";
 
     import app from "../FirebaseInit";
     import { getAuth } from "firebase/auth";
 
     const route = useRoute()
+    const router = useRouter()
     const auth = getAuth()
 
     const heading = ref('')
@@ -14,10 +15,9 @@
     const description = ref<string>('')
 
     const isPriviliged = ref<boolean>(false)
-
-    onMounted(async () => {
         //@ts-ignore
-        let pollID: string = route.params.id
+    const pollID: string = route.params.id
+    onMounted(async () => {
         getPollDetail(pollID).then((poll) => {
         if (poll!=null) {
             heading.value = poll.name
@@ -56,7 +56,7 @@
         </div>
         <div class="button">
             <sl-button variant="primary" outline size="large" pill v-if="isPriviliged">Edytuj</sl-button>
-            <sl-button variant="primary" size="large" pill>Głosuj</sl-button>
+            <sl-button variant="primary" @click="router.push('/poll-vote/' + pollID)" size="large" pill>Głosuj</sl-button>
         </div>
     </div>
 </template>

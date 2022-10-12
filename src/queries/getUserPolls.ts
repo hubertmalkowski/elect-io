@@ -11,25 +11,22 @@ export async function getUserPolls(userUID: string) {
     let polls: Array<Poll> = []
 
     querySnapshot.forEach((doc) => {
-    let data = doc.data()
-    
-    let tempPoll: Poll = {
-      pollID: doc.id,
-      name: data.name,
-      creator: data.creator,
-      creatorUID: data.creatorUID,
-      description: data.description,
-      options: data.options,
-      expirationDate: data.expirationDate,
-      type: data.type,
-      active: data.active
-    }
+      let data = doc.data()
+      
+      let tempPoll: Poll = {
+        pollID: doc.id,
+        name: data.name,
+        creator: data.creator,
+        creatorUID: data.creatorUID,
+        description: data.description,
+        expirationDate: data.expirationDate,
+        type: data.type,
+        active: data.active
+      }
 
-    // push Poll into Poll array
-    (tempPoll);
-    
-    polls.push(tempPoll)
-  })
+      // push Poll into Poll array
+      polls.push(tempPoll)
+    })
 
   return polls;
 }
