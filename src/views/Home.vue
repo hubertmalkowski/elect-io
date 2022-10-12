@@ -8,6 +8,7 @@
             :creator-name="poll.creator"
             :description="poll.description"
             action-label="głosuj teraz"
+            @action="router.push('/poll-detail/' + poll.pollID)"
             class="item"
             :img="image"
         />
@@ -22,11 +23,13 @@
 
 import Card from "@/components/Card.vue";
 import {onMounted, ref, watch} from "vue";
+import { useRouter } from "vue-router";
 
 import type { Poll } from "@/types/poll";
 import { getAllPolls } from "@/queries/getAllPolls"
 import StaggeredGrid from "@/components/StaggeredGrid.vue";
 
+const router = useRouter()
 
 const testPolls = ref<Array<Poll>>([])
 const stagger = ref<Boolean>(false)

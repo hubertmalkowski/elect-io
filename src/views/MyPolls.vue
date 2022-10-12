@@ -8,7 +8,7 @@
             :description="poll.description"
             action-label="podgląd"
             class="item"
-            @action="$router.push('/poll-detail')"
+            @action="router.push('/poll-detail/'+poll.pollID)"
             :img="image"
         />
       </div>
@@ -19,15 +19,17 @@
 <script setup lang="ts">
   import Card from "@/components/Card.vue";
   import {onMounted, ref, watch} from "vue";
+  import { useRouter} from "vue-router"
 
   import type { Poll } from "@/types/poll";
   import { getUserPolls } from "@/queries/getUserPolls"
   import StaggeredGrid from "@/components/StaggeredGrid.vue";
 
   import app from "../FirebaseInit";
-  import { getAuth } from "@firebase/auth";
+  import { getAuth } from "firebase/auth";
 
   const auth = getAuth(app)
+  const router = useRouter()
 
   const testPolls = ref<Array<Poll>>([])
   const stagger = ref<Boolean>(false)

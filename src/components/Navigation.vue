@@ -22,12 +22,13 @@
     </nav>
 
     <div class="user">
-      <RouterLink to="/user">
+      <!-- i got annoyed by that fricking warn remove when adding user display -->
+      <!-- <RouterLink to="/user"> -->
         <div class="user-icon">
           <div class="subtitle-1">{{name}}</div>
         </div>
 
-      </RouterLink>
+      <!-- </RouterLink> -->
 
       <router-link to="/settings">
         <div class="userSetting">

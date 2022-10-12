@@ -12,9 +12,12 @@ export async function getUserPolls(userUID: string) {
 
     querySnapshot.forEach((doc) => {
     let data = doc.data()
+    
     let tempPoll: Poll = {
+      pollID: doc.id,
       name: data.name,
       creator: data.creator,
+      creatorUID: data.creatorUID,
       description: data.description,
       options: data.options,
       expirationDate: data.expirationDate,
