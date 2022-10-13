@@ -102,10 +102,6 @@ function disableStagger() {
   })
 }
 
-
-
-
-
 </script>
 
 <style scoped>
@@ -135,7 +131,8 @@ function disableStagger() {
   .staggered-grid {
     flex-direction: column;
     justify-content: flex-start;
-    gap: 40px;
+    gap: 20px;
+    padding-inline: 20px;
   }
 }
 

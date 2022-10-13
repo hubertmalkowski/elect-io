@@ -9,7 +9,6 @@
             action-label="przejdź"
             class="item"
             @action="router.push('/poll-detail/'+poll.pollID)"
-            :img="image"
         />
       </div>
     </StaggeredGrid>

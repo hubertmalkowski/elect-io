@@ -46,7 +46,8 @@ const router = createRouter({
       path: '/poll-vote/:id',
       name: 'poll-vote',
       component: PollVote
-    }
+    },
+
   ]
 })
 
