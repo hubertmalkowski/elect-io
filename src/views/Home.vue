@@ -7,7 +7,7 @@
             :heading="poll.name"
             :creator-name="poll.creator"
             :description="poll.description"
-            action-label="głosuj teraz"
+            action-label="przejdź"
             @action="router.push('/poll-detail/' + poll.pollID)"
             class="item"
         />

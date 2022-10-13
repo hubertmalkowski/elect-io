@@ -1,6 +1,6 @@
 <script lang="ts" setup>
     import { onMounted, ref, watch } from "vue";
-    import { useRoute } from "vue-router";
+    import { useRoute, useRouter } from "vue-router";
     import { getPollDetail } from "@/queries/getPollDetail";
     import { getOptionsFromPoll } from "@/queries/getOptionsFromPoll";
 
@@ -27,6 +27,7 @@
     ])
 
     const route = useRoute()
+    const router = useRouter()
 
     const heading = ref('')
     const creatorName = ref<string>('')
@@ -56,7 +57,10 @@
     onMounted(() => {
         test.value!.onsubmit = (event) => {
             event.preventDefault()
+            if(selectedPollID.length < 1) { return}
             addValueToOption(selectedPollID, pollID, 1)
+            router.push("/")
+            alert("odddano głos")
         }
     })
 

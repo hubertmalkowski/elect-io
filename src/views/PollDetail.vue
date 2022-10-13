@@ -5,6 +5,7 @@
 
     import app from "../FirebaseInit";
     import { getAuth } from "firebase/auth";
+import { getPollHistory } from "@/queries/getPollHistory";
 
     const route = useRoute()
     const router = useRouter()
@@ -33,6 +34,8 @@
         }
     })
     })
+
+    getPollHistory(pollID)
     
 </script>
 

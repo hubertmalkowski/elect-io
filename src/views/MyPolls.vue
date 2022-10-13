@@ -6,7 +6,7 @@
             :heading="poll.name"
             :creator-name="poll.creator"
             :description="poll.description"
-            action-label="podgląd"
+            action-label="przejdź"
             class="item"
             @action="router.push('/poll-detail/'+poll.pollID)"
             :img="image"
