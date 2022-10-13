@@ -11,20 +11,7 @@
     import type { Option } from "@/types/option"
     import { addValueToOption } from "@/queries/addValueToOption";
     
-    const options = ref<Array<Option>>([
-        // {
-        //     name: "Opcja A",
-        //     id: "id1"
-        // },
-        // {
-        //     name: "Opcja B",
-        //     id: "id2"
-        // },
-        // {
-        //     name: "Opcja C",
-        //     id: "id3"
-        // },
-    ])
+    const options = ref<Array<Option>>([])
 
     const route = useRoute()
     const router = useRouter()

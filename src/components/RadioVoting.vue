@@ -2,10 +2,10 @@
     import '@shoelace-style/shoelace/dist/components/radio/radio.js';
     import '@shoelace-style/shoelace/dist/components/radio-group/radio-group.js';
     import '@shoelace-style/shoelace/dist/components/button/button.js';
-    import { withDefaults, defineProps, ref } from "vue";
+    import {withDefaults, defineProps, ref, onMounted} from "vue";
     import type { Option } from '@/types/option'
 
-    export  interface Props {
+    interface Props {
         pollName?: string,
         options?: Array<Option>
     }
@@ -23,6 +23,7 @@
         emit('voteChange', event.target.value)
 
     }
+
 </script>
 
 <template>

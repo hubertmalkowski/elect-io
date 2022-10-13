@@ -11,14 +11,15 @@ export async function getPollHistory(pollID: string) {
 
     const pollRef = doc(db, "/polls/"+pollID)
 
-    getDoc(pollRef).then((poll) => {
+     await getDoc(pollRef).then((poll) => {
         if (poll.exists() && poll.data() != undefined) {
             if (poll.data().history) {
                 history = poll.data().history
-
             }
         }
     })
 
     return history
+
+
 }
