@@ -1,8 +1,12 @@
 <template>
   <div>
-    <desktop>
+    <mobile v-if="mobile">
+      <slot/>
+    </mobile>
+    <desktop v-else>
       <slot/>
     </desktop>
+
   </div>
 
 </template>
@@ -11,19 +15,19 @@
 
 import {onMounted, ref} from "vue";
 import Desktop from "@/layouts/homeResponsive/desktop.vue";
+import {useMobileBreakpoint} from "@/compsables/useMobileBreakpoint";
+import Mobile from "@/layouts/homeResponsive/mobile.vue";
 
 const mobile = ref<boolean>(false)
-mobile.value = ifMobile()
 onMounted(() => {
+  mobile.value = useMobileBreakpoint(window)
 
   window.addEventListener("resize", ()=>{
-    mobile.value = ifMobile()
+    mobile.value = useMobileBreakpoint(window)
   })
 })
 
-function ifMobile() {
-  return window.innerWidth <= 960;
-}
+
 
 </script>
 

@@ -81,7 +81,7 @@ const name = ref("Hubert Małkowski")
 
 @media screen and (max-width: 1023px) {
   .Navigation {
-    padding: 20px;
+    padding: 0;
     grid-template-rows: 2.5fr 0.5fr;
     grid-template-areas: "nav" "user";
 
