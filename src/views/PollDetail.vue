@@ -5,7 +5,7 @@
 
     import app from "../FirebaseInit";
     import { getAuth } from "firebase/auth";
-import { getPollHistory } from "@/queries/getPollHistory";
+    import { getPollHistory } from "@/queries/getPollHistory";
 
     const route = useRoute()
     const router = useRouter()
@@ -16,27 +16,36 @@ import { getPollHistory } from "@/queries/getPollHistory";
     const description = ref<string>('')
 
     const isPriviliged = ref<boolean>(false)
+    const canVote = ref<boolean>(false)
         //@ts-ignore
     const pollID: string = route.params.id
     onMounted(async () => {
         getPollDetail(pollID).then((poll) => {
-        if (poll!=null) {
-            heading.value = poll.name
-            creatorName.value = poll.creator
-            description.value = poll.description
+            if (poll!=null) {
+                heading.value = poll.name
+                creatorName.value = poll.creator
+                description.value = poll.description
 
-            const currentUser = auth.currentUser!.uid
-            if (poll.creatorUID == currentUser){
-                // @TODO
-                // add "edit" button if it's a poll owned by that user
-                isPriviliged.value = true
+                const currentUser = auth.currentUser!.uid
+                if (poll.creatorUID == currentUser){
+                    // @TODO
+                    // add "edit" button if it's a poll owned by that user
+                    isPriviliged.value = true
+                }
+
+                // const history: Array<String>= await getPollHistory(pollID)
+                getPollHistory(pollID).then((history) => {
+                    if (history.includes(currentUser)){
+                    canVote.value = false
+                    } else {
+                        canVote.value = true
+                        console.log(history);
+                    }
+                })
             }
-        }
-    })
+        })
     })
 
-    getPollHistory(pollID)
-    
 </script>
 
 <template>
@@ -59,7 +68,7 @@ import { getPollHistory } from "@/queries/getPollHistory";
         </div>
         <div class="button">
             <sl-button variant="primary" outline size="large" pill v-if="isPriviliged">Edytuj</sl-button>
-            <sl-button variant="primary" @click="router.push('/poll-vote/' + pollID)" size="large" pill>Głosuj</sl-button>
+            <sl-button v-if="canVote" variant="primary" @click="router.push('/poll-vote/' + pollID)" size="large" pill>Głosuj</sl-button>
         </div>
     </div>
 </template>

@@ -5,7 +5,7 @@
 import app from "../FirebaseInit"
 import { getFirestore, doc, getDoc } from "firebase/firestore"
 
-export function getPollHistory(pollID: string) {
+export async function getPollHistory(pollID: string) {
     const db = getFirestore(app)
     let history: Array<string> = []
 
@@ -16,11 +16,9 @@ export function getPollHistory(pollID: string) {
             if (poll.data().history) {
                 history = poll.data().history
 
-                console.log(history)
-                return history
             }
         }
     })
 
-    return false
+    return history
 }
