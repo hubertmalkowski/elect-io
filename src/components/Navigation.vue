@@ -18,7 +18,14 @@
           <div class="subtitle-1">Moje sondaże</div>
         </div>
       </router-link>
-
+      <router-link to="/preview" class="link">
+        <div class="navItem">
+          <span class="material-symbols-outlined">
+            bug_report
+          </span>
+          <div class="subtitle-1">COMPONENT PREVIEW (TEMPORARY)</div>
+        </div>
+      </router-link>
     </nav>
 
     <div class="user">
