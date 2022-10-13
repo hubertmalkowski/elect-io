@@ -102,10 +102,6 @@ function disableStagger() {
   })
 }
 
-
-
-
-
 </script>
 
 <style scoped>

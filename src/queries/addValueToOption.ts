@@ -15,22 +15,22 @@ export async function addValueToOption(optionID: string, pollID: string, value: 
     
     getDoc(pollRef).then(async (poll) => {
         if (poll.data() != undefined){
-        const history: Array<string> = poll.data().history
+            const history : Array<string> = poll.data()!.history
 
-        if (history.includes(auth.currentUser?.uid)) {
-            console.log("chłop już jest w historii");
-            return
-        }
-        else {
-            console.log("można na luzie głosować");
-            await updateDoc(optionRef, {
-                value: increment(value)
-            })
-        
-            await updateDoc(pollRef, {
-                history: arrayUnion(auth.currentUser.uid)
-            })
-        }
+            if (history.includes(auth.currentUser!.uid)) {
+                console.log("chłop już jest w historii");
+                return
+            }
+            else {
+                console.log("można na luzie głosować");
+                await updateDoc(optionRef, {
+                    value: increment(value)
+                })
+
+                await updateDoc(pollRef, {
+                    history: arrayUnion(auth.currentUser!.uid)
+                })
+            }
     }
     })
     
