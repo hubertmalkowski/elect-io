@@ -39,7 +39,7 @@
                     canVote.value = false
                     } else {
                         canVote.value = true
-                        console.log(history);
+                        // console.log(history);
                     }
                 })
             }
@@ -69,6 +69,7 @@
         <div class="button">
             <sl-button variant="primary" outline size="large" pill v-if="isPriviliged">Edytuj</sl-button>
             <sl-button v-if="canVote" variant="primary" @click="router.push('/poll-vote/' + pollID)" size="large" pill>Głosuj</sl-button>
+            <sl-button v-else variant="primary" disabled size="large" pill>Głosuj</sl-button>
         </div>
     </div>
 </template>

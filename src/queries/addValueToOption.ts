@@ -18,11 +18,11 @@ export async function addValueToOption(optionID: string, pollID: string, value: 
             const history : Array<string> = poll.data()!.history
 
             if (history.includes(auth.currentUser!.uid)) {
-                console.log("chłop już jest w historii");
+                // console.log("chłop już jest w historii");
                 return
             }
             else {
-                console.log("można na luzie głosować");
+                // console.log("można na luzie głosować");
                 await updateDoc(optionRef, {
                     value: increment(value)
                 })

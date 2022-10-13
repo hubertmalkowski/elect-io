@@ -5,7 +5,7 @@ import type { Option } from "@/types/option";
 
 export async function getOptionsFromPoll(pollID: string) {
     const db = getFirestore(app)
-    console.log(pollID);
+    // console.log(pollID);
     
     let options: Array<Option> = []
 

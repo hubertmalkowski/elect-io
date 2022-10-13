@@ -4,7 +4,7 @@ import type { Poll } from "@/types/poll";
 
 export async function getPollDetail(pollID: string) {
     const db = getFirestore(app)
-    console.log(pollID);
+    // console.log(pollID);
     
     let poll: Poll
 
