@@ -7,6 +7,7 @@
             :heading="poll.name"
             :creator-name="poll.creator"
             :description="poll.description"
+            :img="poll.image"
             action-label="przejdź"
             @action="router.push('/poll-detail/' + poll.pollID)"
             class="item"
@@ -43,14 +44,6 @@ onMounted(async () => {
 watch(testPolls, (oldTestPolls, newTestPolls) => {
   stagger.value = newTestPolls !== [];
 })
-
-
-
-
-
-const image = "https://wio.waw.pl/static/files/gallery/8/1107884_1606493893.jpg"
-
-
 
 </script>
 

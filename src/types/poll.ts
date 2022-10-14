@@ -6,6 +6,7 @@ export interface Poll {
     creator: string,
     creatorUID: string,
 
+    image: string,
     description: string,
     expirationDate: Date,
 

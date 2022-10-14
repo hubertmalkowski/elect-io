@@ -21,7 +21,8 @@ export async function getPollDetail(pollID: string) {
             description: data.description,
             expirationDate: data.expirationDate,
             type: data.type,
-            active: data.active
+            active: data.active,
+            image: data.image
         }
     } else{
         console.log("Document retrievement failed");

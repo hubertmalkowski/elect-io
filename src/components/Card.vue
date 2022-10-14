@@ -45,7 +45,7 @@ function action() {
 
   <article class="card">
     <div v-if="img != null" class="imageWrapper">
-      <img :src="img" alt="Image depicting ">
+      <img :src="img">
     </div>
     <div class="headingWrapper" v-if="heading != null">
       <span class="body-large">{{heading}}</span>

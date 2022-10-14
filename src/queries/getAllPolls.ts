@@ -18,7 +18,8 @@ export async function getAllPolls() {
       description: data.description,
       expirationDate: data.expirationDate,
       type: data.type,
-      active: data.active
+      active: data.active,
+      image: data.image
     }
 
     // push Poll into Poll array

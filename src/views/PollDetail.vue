@@ -14,6 +14,7 @@
     const heading = ref('')
     const creatorName = ref<string>('')
     const description = ref<string>('')
+    const imageLink = ref<string>('')
 
     const isPriviliged = ref<boolean>(false)
     const canVote = ref<boolean>(false)
@@ -25,6 +26,10 @@
                 heading.value = poll.name
                 creatorName.value = poll.creator
                 description.value = poll.description
+
+                if (poll.image != "") {
+                    imageLink.value = poll.image
+                }
 
                 const currentUser = auth.currentUser!.uid
                 if (poll.creatorUID == currentUser){
@@ -50,7 +55,7 @@
 
 <template>
     <div class="detail">
-        <img src="https://wio.waw.pl/static/files/gallery/8/1107884_1606493893.jpg" alt="test">
+        <img :src="imageLink">
         
         <div class="headingWrapper" v-if="heading != ''">
             <span>{{heading}}</span>
