@@ -64,14 +64,24 @@ import '@shoelace-style/shoelace/dist/components/divider/divider.js';
 
 import app from '../FirebaseInit'
 
+import {onMounted, ref, watch} from "vue";
+import { signOut, getAuth, onAuthStateChanged } from 'firebase/auth'
 
-import { signOut, getAuth } from 'firebase/auth'
 const auth = getAuth(app)
 
+const name = ref('')
 
-import {ref} from "vue";
+onMounted(() => {
+  //currently works but only after log in not after registering
+  onAuthStateChanged(auth, (user: any) => {
+    name.value = user != null ? user.displayName : "user not logged in"
+  })
 
-const name = ref("Hubert Małkowski")
+  //dont know why doesn't work
+  if(auth.currentUser && auth.currentUser.displayName){
+    name.value = auth.currentUser.displayName
+  }
+})
 
 </script>
 
