@@ -1,5 +1,5 @@
 <template>
-  <section ref="grid" class="" :class="{loader : !stagger, 'staggered-grid' : stagger}">
+  <section ref="grid" class="container" :class="{loader : !stagger, 'staggered-grid' : stagger}">
     <slot v-if="stagger"></slot>
     <sl-spinner v-else style="font-size: 4rem"></sl-spinner>
   </section>
@@ -138,6 +138,13 @@ function disableStagger() {
 
 sl-spinner {
   --indicator-color: var(--Color-Primary-500);
+}
+
+.container {
+  height: 100vh;
+  overflow-y: scroll;
+  padding-right: 4px;
+
 }
 
 

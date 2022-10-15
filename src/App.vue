@@ -67,11 +67,25 @@ watch(() => route.name, () => {
 
 
   <HomeLayout v-if="layoutMap.get('main')">
-    <RouterView></RouterView>
+    <RouterView v-slot="{ Component }">
+      <transition mode="out-in">
+        <component :is="Component"/>
+      </transition>
+    </RouterView>
   </HomeLayout>
 
 </template>
 
 <style scoped>
+
+.v-enter-active,
+.v-leave-active {
+  transition: opacity 0.3s ease;
+}
+
+.v-enter-from,
+.v-leave-to {
+  opacity: 0;
+}
 
 </style>

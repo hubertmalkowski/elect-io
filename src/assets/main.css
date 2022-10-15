@@ -9,6 +9,7 @@ body {
     margin: 0;
     background-color: var(--Background);
     font-family: 'Inter', sans-serif;
+    overflow: hidden;
 }
 
 .column {

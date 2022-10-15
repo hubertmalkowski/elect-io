@@ -1,8 +1,8 @@
 <template>
 
-  <draggable v-model="arra">
+  <draggable v-model="arra" tag="transition-group" >
     <template #item="{element}">
-      <div>{{element}}</div>
+      <OptionInput v-model="test"></OptionInput>
 
     </template>
 
@@ -15,12 +15,15 @@ import draggable from 'vuedraggable'
 
 
 import {ref} from "vue";
+import OptionInput from "@/components/OptionInput.vue";
 
 const arra = ref([
     "test",
     "test2",
-    "test3"
+    "test3  "
 ])
+
+const test = ref("")
 
 
 </script>
