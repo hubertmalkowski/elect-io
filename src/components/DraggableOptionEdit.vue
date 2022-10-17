@@ -1,11 +1,20 @@
 <template>
 
-  <draggable v-model="arra" tag="transition-group" >
+  <draggable v-model="options"  item-key="id" :move="change()">
     <template #item="{element}">
-      <OptionInput v-model="test"></OptionInput>
-
+      <div class="flex">
+      <span class="material-symbols-outlined drag">
+        drag_indicator
+      </span>
+          <sl-input placeholder="Option Name"
+                    :value="element.name"
+                    @sl-input="(event) => {element.name = event.target.value; change()}"
+          ></sl-input>
+          <span class="material-symbols-outlined delete" @click="deleteElement(element.id)">
+        remove_circle
+      </span>
+        </div>
     </template>
-
   </draggable>
 
 </template>
@@ -14,20 +23,63 @@
 import draggable from 'vuedraggable'
 
 
-import {ref} from "vue";
-import OptionInput from "@/components/OptionInput.vue";
+import {ref, watch} from "vue";
 
-const arra = ref([
-    "test",
-    "test2",
-    "test3  "
-])
+const props = defineProps({
+  options: {
+    type: Array,
+    default: [
+      {
+        name: ref(""),
+        id: ""
+      }
+    ]
+  }
+})
 
-const test = ref("")
+const emit = defineEmits(['change'])
+
+function deleteElement(id : string) {
+  //@ts-ignore
+  props.options?.splice(props.options?.findIndex(element => element.id == id), 1)
+  emit('change', props.options)
+}
+
+function change() {
+  emit('change', props.options)
+}
 
 
 </script>
 
 <style scoped>
+
+.flex {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 5px 0;
+}
+.flex span:not(.drag) {
+  cursor: pointer;
+  user-select: none;
+}
+
+.drag {
+  cursor: grab;
+  user-select: none;
+
+}
+
+
+
+.flex .delete {
+  color: var(--Color-Danger-600);
+}
+
+sl-input {
+  width: 100%;
+}
+
 
 </style>

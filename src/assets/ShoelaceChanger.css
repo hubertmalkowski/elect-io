@@ -29,3 +29,8 @@ sl-button[variant="primary"][outline]::part(base):hover {
 sl-input::part(base) {
     border-radius: 16px;
 }
+
+
+sl-avatar::part(base) {
+    border-radius: 33%;
+}

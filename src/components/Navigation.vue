@@ -32,6 +32,7 @@
       <!-- i got annoyed by that fricking warn remove when adding user display -->
       <!-- <RouterLink to="/user"> -->
         <div class="user-icon">
+          <sl-avatar initials="SL" label="Avatar with initials: SL"></sl-avatar>
           <div class="subtitle-1">{{name}}</div>
         </div>
 
@@ -61,6 +62,7 @@ import '@shoelace-style/shoelace/dist/components/dropdown/dropdown.js';
 import '@shoelace-style/shoelace/dist/components/menu/menu.js';
 import '@shoelace-style/shoelace/dist/components/menu-item/menu-item.js';
 import '@shoelace-style/shoelace/dist/components/divider/divider.js';
+import '@shoelace-style/shoelace/dist/components/avatar/avatar.js';
 
 import app from '../FirebaseInit'
 
@@ -120,6 +122,12 @@ onMounted(() => {
   display: flex;
   align-items: center;
   gap: 10px;
+}
+
+.userSetting {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
 nav {
