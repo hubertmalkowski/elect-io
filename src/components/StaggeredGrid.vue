@@ -107,6 +107,7 @@ function disableStagger() {
 <style scoped>
 
 .column {
+
   display: flex;
   flex-direction: column;
   gap: 40px;

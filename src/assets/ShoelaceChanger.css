@@ -34,3 +34,7 @@ sl-input::part(base) {
 sl-avatar::part(base) {
     border-radius: 33%;
 }
+
+sl-textarea::part(base) {
+    border-radius: 14px;
+}

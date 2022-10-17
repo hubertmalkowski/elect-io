@@ -17,4 +17,6 @@ body {
     flex-direction: column;
     gap: 40px;
     width: 48%;
+    padding: 14px 0;
+
 }
