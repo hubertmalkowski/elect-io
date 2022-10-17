@@ -19,7 +19,8 @@ export async function createNewPoll(name: string, creator: string, creatorUID: s
         creator: creator,
         creatorUID: creatorUID,
         description: description,
-        type: type
+        type: type,
+        history: []
     }
 
     const newPoll = await addDoc(collection(db, "polls"), pollData)

@@ -10,6 +10,7 @@
 
     import type { Option } from "@/types/option"
     import { addValueToOption } from "@/queries/addValueToOption";
+import CheckboxVoting from "../components/CheckboxVoting.vue";
     
     const options = ref<Array<Option>>([])
 
@@ -19,6 +20,8 @@
     const heading = ref('')
     const creatorName = ref<string>('')
     const description = ref<string>('')
+    
+    const pollType = ref<string>('')
 
     //@ts-ignore
     const pollID: string = route.params.id
@@ -28,6 +31,7 @@
             heading.value = poll.name
             creatorName.value = poll.creator
             description.value = poll.description
+            pollType.value = poll.type
         }
         })
 
@@ -40,16 +44,41 @@
 
     const test = ref<HTMLElement | null>(null)
     let selectedPollID: string = ""
+    let selectedPollsIDs: Array<string> = []
 
     onMounted(() => {
         test.value!.onsubmit = (event) => {
-            event.preventDefault()
-            if(selectedPollID.length < 1) { return}
-            addValueToOption(selectedPollID, pollID, 1)
+            event.preventDefault()            
+            if(selectedPollID.length > 1 && selectedPollsIDs.length < 1) {
+                addValueToOption(selectedPollID, pollID, 1)
+            } else if(selectedPollID.length < 1 && selectedPollsIDs.length > 0) {
+                console.log("click");
+                selectedPollsIDs.forEach((pollTemp) => {
+                    console.log(pollTemp);
+                    
+                    addValueToOption(pollTemp, pollID, 1)
+                })
+            }
             router.push("/")
             alert("odddano głos")
         }
     })
+
+    function updatePollsIDs(value: string) {
+        //remove if contained inside selected polls
+        if (selectedPollsIDs.includes(value)) {
+            const valueIndex = selectedPollsIDs.indexOf(value)
+            if (valueIndex >= 0) {
+                selectedPollsIDs.splice(valueIndex, 1)                
+            }
+        } else { //add otherwise
+            selectedPollsIDs.push(value)
+        }
+
+        //test log
+        console.log(selectedPollsIDs);
+        
+    }
 
     
     function voteChanged(value: string) {
@@ -66,11 +95,17 @@
                 </router-link></span>
         </div>
         <form ref="test">
-            <RadioVoting v-if="options.length > 0"
+            <RadioVoting v-if="pollType == 'radio' && options.length > 0"
                 @vote-change="voteChanged"
                 :poll = "route.params.id"
                 :options = "options"
             />
+            <CheckboxVoting v-else-if="pollType == 'checkbox' && options.length > 0"
+                @vote-change="updatePollsIDs"
+                :poll = "route.params.id"
+                :options = "options"
+            />
+            <span v-else>Wrong poll type!</span>
             <sl-button type="submit" variant="primary" size="large" pill>Zagłosuj</sl-button>
         </form>
     </div>
