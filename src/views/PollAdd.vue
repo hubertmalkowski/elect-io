@@ -10,6 +10,12 @@ import {ref} from "vue";
 <template>
 
  <div>
+
+<!--   Ogólnie to jak będziesz brał options to dostaniesz array obiektów złożonych z
+        - name
+        - id
+        do zapytania do bazy bierz tylko name, id jest po to by działał dobrze draggable
+-->
    <PollAddEditForm></PollAddEditForm>
 
  </div>

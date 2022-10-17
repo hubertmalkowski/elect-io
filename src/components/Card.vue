@@ -20,7 +20,7 @@ const props = defineProps({
   },
   description: {
     type: String,
-    default:null
+    default: null
   },
   actionLabel: {
     type: String,
@@ -31,7 +31,7 @@ const props = defineProps({
 
 
 const emit = defineEmits([
-    'action'
+  'action'
 ])
 
 function action() {
@@ -47,25 +47,24 @@ function action() {
     <div v-if="img != null" class="imageWrapper">
       <img :src="img">
     </div>
-    <div class="headingWrapper" v-if="heading != null">
-      <span class="body-large">{{heading}}</span>
+    <div v-if="heading != null" class="headingWrapper">
+      <span class="body-large">{{ heading }}</span>
       <span class="body-medium"><router-link to="/">
-        {{creatorName}}
+        {{ creatorName }}
       </router-link></span>
     </div>
-    <div class="descriptionWrapper" v-if="description != null">
+    <div v-if="description != null" class="descriptionWrapper">
       <span class="body-medium">
-        {{description}}
+        {{ description }}
       </span>
     </div>
-    <div class="actionsWrapper" v-if="actionLabel != null">
-      <sl-button variant="primary" pill @click="action">{{actionLabel}}</sl-button>
+    <div v-if="actionLabel != null" class="actionsWrapper">
+      <sl-button pill variant="primary" @click="action">{{ actionLabel }}</sl-button>
     </div>
 
   </article>
 
 </template>
-
 
 
 <style scoped>
@@ -103,6 +102,7 @@ div img {
   object-fit: cover;
   /*border-radius: 12px 12px 0 0;*/
 }
+
 .imageWrapper {
   padding: 0 !important;
 }
