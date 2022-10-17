@@ -1,20 +1,31 @@
 <template>
-
+<form @submit.prevent="submit">
   <section class="fields">
-    <h2>Nowy sondaż</h2>
-    <sl-input label="Nazwa"></sl-input>
-    <sl-textarea label="Opis" resize="none"></sl-textarea>
+    <div class="button" >
+      <h2>Nowy sondaż</h2>
+      <sl-button variant="primary" type="submit" size="large">Zapisz</sl-button>
+    </div>
+    <sl-input label="Nazwa"
+              :value="poll.name"
+              @sl-input="poll.name = $event.target.value"></sl-input>
+
+    <sl-textarea label="Opis"
+                 resize="none"
+                 :value="poll.description"
+                 @sl-input="poll.description = $event.target.value"
+    ></sl-textarea>
     <input type="file">
   </section>
   <section>
     <div class="button">
       <h3>Opcje</h3>
-      <sl-button variant="primary" @click="add" pill>Add</sl-button>
+      <sl-button variant="default" @click="add" pill>Add</sl-button>
     </div>
     <DraggableOptionEdit :options="options" @change="test"/>
   </section>
-</template>
+</form>
 
+</template>
 <script setup lang="ts">
 import '@shoelace-style/shoelace/dist/components/textarea/textarea';
 import DraggableOptionEdit from "@/components/DraggableOptionEdit.vue";
@@ -46,37 +57,31 @@ const props = defineProps({
 })
 
 
+const options = ref<Array<Option>>()
 
+const poll = ref<Object>()
 
-const options = ref<Array<Option>>([
-  {
-    name: "sexop",
-    id: "123042"
-  },
-  {
-    name: "bimbam",
-    id: "123"
-  },
-  {
-    name: "ser",
-    id: "12334"
-  }
-])
-
-
+//@ts-ignore
+options.value = props.options
+poll.value = props.poll
 
 function test(optionsChanged : any) {
   options.value = optionsChanged
-  console.log(options.value)
 }
-
 function add() {
-  options.value.unshift(
+  options.value!.unshift(
       {
         name: "",
         id: Math.random().toString()
       }
   )
+}
+const emit = defineEmits([
+    'submit'
+])
+function submit() {
+  console.log("sex")
+  emit('submit', {options: options.value, poll: poll.value})
 }
 </script>
 
@@ -86,7 +91,7 @@ function add() {
   display: flex;
   flex-direction: column;
   gap: 26px;
-  margin-bottom: 26px;
+  /*margin-bottom: 16px;*/
 }
 
 h2 {
@@ -94,6 +99,7 @@ h2 {
 }
 
 .button {
+  margin-top: 26px;
   display: flex;
   justify-content: space-between;
 }
