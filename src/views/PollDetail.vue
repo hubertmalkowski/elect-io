@@ -6,6 +6,7 @@
     import app from "../FirebaseInit";
     import { getAuth } from "firebase/auth";
     import { getPollHistory } from "@/queries/getPollHistory";
+    import { getOptionsValuesFromPoll } from "@/queries/getOptionsValuesFromPoll";
 
     const route = useRoute()
     const router = useRouter()
@@ -15,6 +16,8 @@
     const creatorName = ref<string>('')
     const description = ref<string>('')
     const imageLink = ref<string>('')
+
+    const votes = ref<Array<{name: string, value: number}>>([])
 
     const isPriviliged = ref<boolean>(false)
     const canVote = ref<boolean>(false)
@@ -36,6 +39,13 @@
                     // @TODO
                     // add "edit" button if it's a poll owned by that user
                     isPriviliged.value = true
+                }
+                if (isPriviliged){
+                    getOptionsValuesFromPoll(pollID).then((options) => {
+                        options.forEach((option) => {
+                            votes.value.push(option)
+                        })
+                    })
                 }
 
                 // const history: Array<String>= await getPollHistory(pollID)
@@ -76,10 +86,17 @@
             <sl-button v-if="canVote" variant="primary" @click="router.push('/poll-vote/' + pollID)" size="large" pill>Głosuj</sl-button>
             <sl-button v-else variant="primary" disabled size="large" pill>Głosuj</sl-button>
         </div>
+        <div class="votes" v-if="isPriviliged">
+            <span v-for="vote in votes">{{vote.name}} ma {{vote.value}} głos/y/ów</span>
+        </div>
     </div>
 </template>
 
 <style scoped>
+    .votes{
+        display: flex;
+        flex-direction: column;
+    }
     .detail {
         display: flex;
         flex-direction: column;
