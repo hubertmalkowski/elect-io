@@ -1,5 +1,5 @@
 import app from "../FirebaseInit";
-import { getFirestore, getDocs, collection} from "firebase/firestore";
+import { getFirestore, getDocs, collection, query, orderBy} from "firebase/firestore";
 import type { Poll } from "@/types/poll";
 import type { Option } from "@/types/option";
 
@@ -8,8 +8,9 @@ export async function getOptionsFromPoll(pollID: string) {
     // console.log(pollID);
     
     let options: Array<Option> = []
-
-    const querySnapshot = await getDocs(collection(db, "polls/"+pollID+"/options"))
+    //collection(db, "polls/"+pollID+"/options")
+    const q = query(collection(db, "polls/"+pollID+"/options"), orderBy("order"))
+    const querySnapshot = await getDocs(q)
     
 
     querySnapshot.forEach((doc) => {
