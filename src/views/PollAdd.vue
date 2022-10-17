@@ -6,12 +6,12 @@ import {ref} from "vue";
 function f(test : any) {
   console.log(test.options)
   console.log(test.poll)
+  console.log(test.image)
 }
 
 const samplePoll = ref({
   name: "testowy formularz przekazany przez form",
   description: "deskrypcja tego forma",
-  image: "img"
 })
 
 </script>

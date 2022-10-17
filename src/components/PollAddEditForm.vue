@@ -14,7 +14,11 @@
                  :value="poll.description"
                  @sl-input="poll.description = $event.target.value"
     ></sl-textarea>
-    <input type="file">
+    <input type="file"
+           accept="image/gif, image/png, image/jpg"
+           :value="imager"
+           @input="imager = $event.target.value"
+    >
   </section>
   <section>
     <div class="button">
@@ -40,7 +44,6 @@ const props = defineProps({
     type: Object,
     default: {
       name: "",
-      image: "",
       description: "",
     }
   },
@@ -52,8 +55,12 @@ const props = defineProps({
         id: "12"
       }
     ]
-
+  },
+  image: {
+    type: String,
+    default: ""
   }
+
 })
 
 
@@ -61,9 +68,13 @@ const options = ref<Array<Option>>()
 
 const poll = ref<Object>()
 
+const imager = ref<String>()
+
+
 //@ts-ignore
 options.value = props.options
 poll.value = props.poll
+imager.value = props.image
 
 function test(optionsChanged : any) {
   options.value = optionsChanged
@@ -81,7 +92,7 @@ const emit = defineEmits([
 ])
 function submit() {
   console.log("sex")
-  emit('submit', {options: options.value, poll: poll.value})
+  emit('submit', {options: options.value, poll: poll.value, image: imager.value})
 }
 </script>
 
