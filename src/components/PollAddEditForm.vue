@@ -9,6 +9,10 @@
               :value="poll.name"
               @sl-input="poll.name = $event.target.value"></sl-input>
 
+    <sl-input label="Typ"
+              :value="poll.type"
+              @sl-input="poll.type = $event.target.value"></sl-input>
+
     <sl-textarea label="Opis"
                  resize="none"
                  :value="poll.description"
@@ -45,6 +49,7 @@ const props = defineProps({
     default: {
       name: "",
       description: "",
+      type: ""
     }
   },
   options: {

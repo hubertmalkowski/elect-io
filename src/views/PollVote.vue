@@ -10,7 +10,7 @@
 
     import type { Option } from "@/types/option"
     import { addValueToOption } from "@/queries/addValueToOption";
-import CheckboxVoting from "../components/CheckboxVoting.vue";
+    import CheckboxVoting from "../components/CheckboxVoting.vue";
     
     const options = ref<Array<Option>>([])
 
@@ -52,7 +52,6 @@ import CheckboxVoting from "../components/CheckboxVoting.vue";
             if(selectedPollID.length > 1 && selectedPollsIDs.length < 1) {
                 addValueToOption(selectedPollID, pollID, 1)
             } else if(selectedPollID.length < 1 && selectedPollsIDs.length > 0) {
-                console.log("click");
                 selectedPollsIDs.forEach((pollTemp) => {
                     console.log(pollTemp);
                     
@@ -76,7 +75,7 @@ import CheckboxVoting from "../components/CheckboxVoting.vue";
         }
 
         //test log
-        console.log(selectedPollsIDs);
+        // console.log(selectedPollsIDs);
         
     }
 

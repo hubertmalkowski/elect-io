@@ -3,15 +3,40 @@ import DraggableOptionEdit from "@/components/DraggableOptionEdit.vue";
 import PollAddEditForm from "@/components/PollAddEditForm.vue";
 import {ref} from "vue";
 
+import app from "../FirebaseInit"
+import { getAuth } from "firebase/auth";
+
+import { createNewPoll } from "@/queries/createNewPoll";
+
+const auth = getAuth(app)
+
 function f(test : any) {
   console.log(test.options)
   console.log(test.poll)
   console.log(test.image)
+
+  let options: any[] = []
+
+  test.options.forEach((option: { name: any; }) => {
+    options.push(option.name)
+  })
+  // console.log(options);
+
+  createNewPoll(
+    test.poll.name,
+    auth.currentUser!.displayName,
+    auth.currentUser!.uid,
+    test.poll.description,
+    test.poll.type,
+    options
+  )
+  
 }
 
 const samplePoll = ref({
   name: "testowy formularz przekazany przez form",
   description: "deskrypcja tego forma",
+  type: "radio"
 })
 
 </script>
