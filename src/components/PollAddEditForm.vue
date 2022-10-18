@@ -63,7 +63,6 @@ const emit = defineEmits([
   'submit'
 ])
 function submit() {
-
   emit('submit', {options: options.value, poll: poll.value, image: (fileInput.value!.files!.length > 0) ? fileInput.value!.files![0] : null})
 }
 </script>
@@ -124,6 +123,11 @@ h2 {
   margin-top: 26px;
   display: flex;
   justify-content: space-between;
+}
+
+form {
+  height: 100vh;
+  overflow-y: scroll;
 }
 
 </style>
