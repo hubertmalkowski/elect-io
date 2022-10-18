@@ -1,5 +1,5 @@
 import app from "../FirebaseInit";
-import { getDocs, collection, getFirestore } from "firebase/firestore";
+import { getDocs, collection, getFirestore, query, where } from "firebase/firestore";
 import type { Poll } from "@/types/poll";
 
 
@@ -7,7 +7,8 @@ import type { Poll } from "@/types/poll";
 export async function getAllPolls() {
     const db = getFirestore(app)
 
-    const querySnapshot = await getDocs(collection(db, "polls"))
+    const q = query(collection(db, "polls"), where("active", "==", true))
+    const querySnapshot = await getDocs(q)
     let polls: Array<Poll> = []
 
     querySnapshot.forEach((doc) => {

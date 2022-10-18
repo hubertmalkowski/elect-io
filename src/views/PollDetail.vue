@@ -7,6 +7,7 @@
     import { getAuth } from "firebase/auth";
     import { getPollHistory } from "@/queries/getPollHistory";
     import { getOptionsValuesFromPoll } from "@/queries/getOptionsValuesFromPoll";
+import { changePolStatus } from "@/queries/changePollStatus";
 
     const route = useRoute()
     const router = useRouter()
@@ -21,6 +22,7 @@
 
     const isPriviliged = ref<boolean>(false)
     const canVote = ref<boolean>(false)
+    const isActive = ref<boolean>(false)
         //@ts-ignore
     const pollID: string = route.params.id
     onMounted(async () => {
@@ -29,6 +31,7 @@
                 heading.value = poll.name
                 creatorName.value = poll.creator
                 description.value = poll.description
+                isActive.value = poll.active
 
                 if (poll.image != "") {
                     imageLink.value = poll.image
@@ -61,6 +64,15 @@
         })
     })
 
+    function deactivate() {
+        changePolStatus(false, pollID)
+        router.push("/my-polls")
+    }
+
+    function activate() {
+        changePolStatus(true, pollID)
+        router.push("/my-polls")
+    }
 </script>
 
 <template>
@@ -82,9 +94,12 @@
             </span>
         </div>
         <div class="button">
-            <sl-button variant="danger" outline size="large" pill v-if="isPriviliged"><span slot="prefix" class="material-symbols-outlined">
-delete_forever
-</span>Disactivate</sl-button>
+            <sl-button @click="deactivate" variant="danger" outline size="large" pill v-if="isPriviliged && isActive">
+                <span slot="prefix" class="material-symbols-outlined">toggle_off</span>Deactivate
+            </sl-button>
+            <sl-button @click="activate" variant="primary" outline size="large" pill v-else-if="isPriviliged && !isActive">
+                <span slot="prefix" class="material-symbols-outlined">toggle_on</span>Activate
+            </sl-button>
             <sl-button variant="primary" outline size="large" pill v-if="isPriviliged">Edytuj</sl-button>
             <sl-button v-if="canVote" variant="primary" @click="router.push('/poll-vote/' + pollID)" size="large" pill>Głosuj</sl-button>
             <sl-button v-else variant="primary" disabled size="large" pill>Głosuj</sl-button>
