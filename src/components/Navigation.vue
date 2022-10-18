@@ -21,9 +21,9 @@
       <router-link to="/preview" class="link">
         <div class="navItem">
           <span class="material-symbols-outlined">
-            bug_report
+            add
           </span>
-          <div class="subtitle-1">COMPONENT PREVIEW (TEMPORARY)</div>
+          <div class="subtitle-1">Poll add (TEMPORARY LOCATION)</div>
         </div>
       </router-link>
     </nav>

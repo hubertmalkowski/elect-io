@@ -9,12 +9,15 @@ import { getAuth } from "firebase/auth";
 // import { getStorage, uploadBytes, ref as ref2 } from "firebase/storage"
 
 import { createNewPoll } from "@/queries/createNewPoll";
+import {useUserActionStatus} from "@/stores/status";
 // import { setDoc } from "@firebase/firestore";
 
 const auth = getAuth(app)
 // const storage = getStorage(app)
 
 const router = useRouter()
+
+const userActionStatus = useUserActionStatus()
 
 function f(test : any) {
   console.log(test.options)
@@ -36,24 +39,9 @@ function f(test : any) {
     test.poll.type,
     options
   )
-  // an attempt at adding image
-  // ).then((newPoll) => {
-  //   let imageTemp
-  //   if (test.image){
-  //     const storageRef = ref2(storage, "files/${file.name}")
-  //   uploadBytes(storageRef, test.image).then((snapshot) => {
-  //     imageTemp = snapshot.metadata.name
-  //   })
-  //   setDoc(newPoll, {
-  //     image: imageTemp
-  //   })
-  // }
-  // })
-  // sanity is low, I repeat - sanity is low...
 
-  // comment when debugging
-  alert("Dodano nowy sondaż!")
-  router.push("/")
+  router.push("/my-polls")
+  userActionStatus.setStatus("addedPoll")
 }
 
 const samplePoll = ref({

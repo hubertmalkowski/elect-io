@@ -4,9 +4,12 @@ import {useUser} from "@/stores/user"
 import LoginLayout from "@/layouts/LoginLayout.vue"
 import HomeLayout from "@/layouts/HomeLayout.vue"
 import {ref, watch} from "vue"
-
+import '@shoelace-style/shoelace/dist/components/alert/alert';
+import '@shoelace-style/shoelace/dist/components/icon/icon';
 import {getAuth, onAuthStateChanged} from "firebase/auth"
 import app from "./FirebaseInit"
+import {useUserActionStatus} from "@/stores/status";
+import {SlAlert} from "@shoelace-style/shoelace";
 
 const auth = getAuth(app)
 auth.useDeviceLanguage();
@@ -18,6 +21,8 @@ auth.useDeviceLanguage();
 //Router control
 const router = useRouter()
 const route = useRoute()
+
+const userActionStatus = useUserActionStatus()
 
 onAuthStateChanged(auth, (user : any) => {
   if (user){
@@ -39,6 +44,8 @@ let layoutMap = ref<Map<string, boolean>>(new Map())
 layoutMap.value.set("login", false)
 layoutMap.value.set("main", true)
 
+
+//Layout watcher
 watch(() => route.name, () => {
   if (route.name == "login" || route.name == "register") {
     layoutMap.value.set("main", false)
@@ -51,6 +58,15 @@ watch(() => route.name, () => {
 })
 
 
+const successToast = ref<SlAlert | null>(null)
+
+//Status watcher
+userActionStatus.$subscribe((mutation, state) => {
+  if (state.status == "addedPoll") {
+    successToast.value!.toast()
+  }
+})
+
 
 
 
@@ -59,6 +75,12 @@ watch(() => route.name, () => {
 </script>
 
 <template>
+
+  <sl-alert variant="success" duration="5000" closable ref="successToast">
+    <sl-icon slot="icon" name="check2-circle"></sl-icon>
+    <strong>Dodano twój sondaż :)</strong><br />
+    Teraz się zrelaksuj i poczekaj na wyniki sondażu
+  </sl-alert>
 
 
   <LoginLayout v-if="layoutMap.get('login')">
