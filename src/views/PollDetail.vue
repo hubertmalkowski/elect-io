@@ -8,7 +8,8 @@
     import { getPollHistory } from "@/queries/getPollHistory";
     import { getOptionsValuesFromPoll } from "@/queries/getOptionsValuesFromPoll";
 import { changePolStatus } from "@/queries/changePollStatus";
-
+    import {Chart, registerables} from "chart.js";
+    Chart.register(...registerables)
     const route = useRoute()
     const router = useRouter()
     const auth = getAuth()
@@ -39,8 +40,6 @@ import { changePolStatus } from "@/queries/changePollStatus";
 
                 const currentUser = auth.currentUser!.uid
                 if (poll.creatorUID == currentUser){
-                    // @TODO
-                    // add "edit" button if it's a poll owned by that user
                     isPriviliged.value = true
                 }
                 if (isPriviliged){
@@ -48,20 +47,17 @@ import { changePolStatus } from "@/queries/changePollStatus";
                         options.forEach((option) => {
                             votes.value.push(option)
                         })
+                      setupChart()
+
                     })
                 }
 
-                // const history: Array<String>= await getPollHistory(pollID)
                 getPollHistory(pollID).then((history) => {
-                    if (history.includes(currentUser)){
-                    canVote.value = false
-                    } else {
-                        canVote.value = true
-                        // console.log(history);
-                    }
+                    canVote.value = !history.includes(currentUser);
                 })
             }
         })
+
     })
 
     function deactivate() {
@@ -72,6 +68,36 @@ import { changePolStatus } from "@/queries/changePollStatus";
     function activate() {
         changePolStatus(true, pollID)
         router.push("/my-polls")
+    }
+
+    const chart = ref<HTMLCanvasElement | null>(null)
+
+    function setupChart() {
+
+      const voteNames = votes.value.map(element => element.name)
+      const voteValues = votes.value.map(element => element.value)
+
+      console.log(voteNames)
+      //@ts-ignore
+      const myChart = new Chart(chart.value, {
+        type: "bar",
+        data: {
+          labels: voteNames,
+          datasets: [{
+            label: '# of Votes',
+            data: voteValues,
+            backgroundColor: [
+              'rgba(54, 162, 235, 0.2)',
+
+            ],
+            borderColor: [
+              'rgba(54, 162, 235, 1)',
+
+            ],
+            borderWidth: 1
+          }]
+        },
+      })
     }
 </script>
 
@@ -104,9 +130,13 @@ import { changePolStatus } from "@/queries/changePollStatus";
             <sl-button v-if="canVote" variant="primary" @click="router.push('/poll-vote/' + pollID)" size="large" pill>Głosuj</sl-button>
             <sl-button v-else variant="primary" disabled size="large" pill>Głosuj</sl-button>
         </div>
-        <div class="votes" v-if="isPriviliged">
-            <span v-for="vote in votes">{{vote.name}} ma {{vote.value}} głos/y/ów</span>
-        </div>
+      <div class="chart" v-if="isPriviliged">
+        <canvas ref="chart">
+
+        </canvas>
+
+
+      </div>
     </div>
 </template>
 
@@ -164,6 +194,9 @@ import { changePolStatus } from "@/queries/changePollStatus";
         width: 100%;
         gap: 10px;
         justify-content:  flex-end;
+    }
+    .chart {
+      width: 100%;
     }
 
 </style>

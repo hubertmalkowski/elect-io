@@ -56,21 +56,8 @@
     onMounted(() => {
         test.value!.onsubmit = (event) => {
           event.preventDefault()
-          if(selectedPollID.length > 1 && selectedPollsIDs.length < 1) {
-            addValueToOption(selectedPollID, pollID, 1)
-          } else if(selectedPollID.length < 1 && selectedPollsIDs.length > 0) {
-            selectedPollsIDs.forEach((pollTemp) => {
-              console.log(pollTemp);
-
-              addValueToOption(pollTemp, pollID, 1)
-            })
-          }
-          router.push("/").then(() => {
-            document.location.reload()
-          })
-          userActionStatus.setStatus("voted")
-        }
-    })
+          dialog.value!.show()
+        }})
 
     function updatePollsIDs(value: string) {
         //remove if contained inside selected polls
@@ -106,7 +93,7 @@
       router.push("/").then(() => {
         document.location.reload()
       })
-      useUserActionStatus().setStatus("voted")
+      userActionStatus.setStatus("voted")
     }
 </script>
 
