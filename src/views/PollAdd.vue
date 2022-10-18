@@ -29,7 +29,6 @@ function f(test : any) {
   test.options.forEach((option: { name: any; }) => {
     options.push(option.name)
   })
-  // console.log(options);
 
   createNewPoll(
     test.poll.name,
@@ -40,7 +39,7 @@ function f(test : any) {
     options
   ).then((newPoll) => {
     if(test.image){
-      const storageRef = fref(storage, new Date().getTime().toString() + auth.currentUser!.uid)
+      const storageRef = fref(storage, test.image.name)
       uploadBytes(storageRef, test.image).then((snapshot) => {
         getDownloadURL(snapshot.ref).then((value) => {
           updateDoc(newPoll, {
@@ -50,24 +49,9 @@ function f(test : any) {
       })
     }
   })
-  // an attempt at adding image
-  // ).then((newPoll) => {
-  //   let imageTemp
-  //   if (test.image){
-  //     const storageRef = ref2(storage, "files/${file.name}")
-  //   uploadBytes(storageRef, test.image).then((snapshot) => {
-  //     imageTemp = snapshot.metadata.name
-  //   })
-  //   setDoc(newPoll, {
-  //     image: imageTemp
-  //   })
-  // }
-  // })
-  // sanity is low, I repeat - sanity is low...
 
-  router.push("/my-polls").then(() => {
-    document.location.reload()
-  })
+    // document.location.reload()
+  router.push("/")
   userActionStatus.setStatus("addedPoll")
 }
 
@@ -79,11 +63,6 @@ function f(test : any) {
 
  <div>
 
-   <!--   Ogólnie to jak będziesz brał options to dostaniesz array obiektów złożonych z
-        - name
-        - id
-        do zapytania do bazy bierz tylko name; id jest po to by działał dobrze draggable
--->
    <PollAddEditForm    @submit="f"></PollAddEditForm>
 
  </div>

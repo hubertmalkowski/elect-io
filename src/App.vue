@@ -26,11 +26,8 @@ const userActionStatus = useUserActionStatus()
 
 onAuthStateChanged(auth, (user : any) => {
   if (user){
-    ("User logged in! redirecting...");
-
     router.push("/")
   } else {
-    ("User not logged in! redirecting...");
     router.push("/login")
   }
 })

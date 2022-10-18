@@ -14,7 +14,7 @@
     import CheckboxVoting from "../components/CheckboxVoting.vue";
     import {SlDialog} from "@shoelace-style/shoelace";
     import {useUserActionStatus} from "@/stores/status";
-    
+
     const options = ref<Array<Option>>([])
 
     const route = useRoute()
@@ -23,7 +23,7 @@
     const heading = ref('')
     const creatorName = ref<string>('')
     const description = ref<string>('')
-    
+
     const pollType = ref<string>('')
 
     //@ts-ignore
@@ -50,11 +50,25 @@
     let selectedPollsIDs: Array<string> = []
 
 
+    const userActionStatus = useUserActionStatus()
+
     const dialog = ref<SlDialog | null>(null)
     onMounted(() => {
         test.value!.onsubmit = (event) => {
           event.preventDefault()
-          dialog.value!.show()
+          if(selectedPollID.length > 1 && selectedPollsIDs.length < 1) {
+            addValueToOption(selectedPollID, pollID, 1)
+          } else if(selectedPollID.length < 1 && selectedPollsIDs.length > 0) {
+            selectedPollsIDs.forEach((pollTemp) => {
+              console.log(pollTemp);
+
+              addValueToOption(pollTemp, pollID, 1)
+            })
+          }
+          router.push("/").then(() => {
+            document.location.reload()
+          })
+          userActionStatus.setStatus("voted")
         }
     })
 
@@ -63,7 +77,7 @@
         if (selectedPollsIDs.includes(value)) {
             const valueIndex = selectedPollsIDs.indexOf(value)
             if (valueIndex >= 0) {
-                selectedPollsIDs.splice(valueIndex, 1)                
+                selectedPollsIDs.splice(valueIndex, 1)
             }
         } else { //add otherwise
             selectedPollsIDs.push(value)
@@ -71,10 +85,10 @@
 
         //test log
         // console.log(selectedPollsIDs);
-        
+
     }
 
-    
+
     function voteChanged(value: string) {
         selectedPollID = value
     }
