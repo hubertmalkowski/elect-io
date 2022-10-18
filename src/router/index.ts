@@ -49,8 +49,13 @@ const router = createRouter({
       component: PollVote
     },
     {
-      path: '/preview',
+      path: '/poll-add',
       name: 'poll-add',
+      component: PollAdd
+    },
+    {
+      path: '/poll-edit/:id',
+      name: 'poll-edit',
       component: PollAdd
     }
 

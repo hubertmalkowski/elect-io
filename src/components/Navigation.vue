@@ -18,7 +18,7 @@
           <div class="subtitle-1">Moje sondaże</div>
         </div>
       </router-link>
-      <router-link to="/preview" class="link">
+      <router-link to="/poll-add" class="link">
         <div class="navItem">
           <span class="material-symbols-outlined">
             add
