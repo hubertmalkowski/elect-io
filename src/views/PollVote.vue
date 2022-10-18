@@ -14,7 +14,7 @@
     import CheckboxVoting from "../components/CheckboxVoting.vue";
     import {SlDialog} from "@shoelace-style/shoelace";
     import {useUserActionStatus} from "@/stores/status";
-
+    
     const options = ref<Array<Option>>([])
 
     const route = useRoute()
@@ -23,7 +23,7 @@
     const heading = ref('')
     const creatorName = ref<string>('')
     const description = ref<string>('')
-
+    
     const pollType = ref<string>('')
 
     //@ts-ignore
@@ -50,21 +50,20 @@
     let selectedPollsIDs: Array<string> = []
 
 
-    const userActionStatus = useUserActionStatus()
-
     const dialog = ref<SlDialog | null>(null)
     onMounted(() => {
         test.value!.onsubmit = (event) => {
           event.preventDefault()
           dialog.value!.show()
-        }})
+        }
+    })
 
     function updatePollsIDs(value: string) {
         //remove if contained inside selected polls
         if (selectedPollsIDs.includes(value)) {
             const valueIndex = selectedPollsIDs.indexOf(value)
             if (valueIndex >= 0) {
-                selectedPollsIDs.splice(valueIndex, 1)
+                selectedPollsIDs.splice(valueIndex, 1)                
             }
         } else { //add otherwise
             selectedPollsIDs.push(value)
@@ -72,10 +71,10 @@
 
         //test log
         // console.log(selectedPollsIDs);
-
+        
     }
 
-
+    
     function voteChanged(value: string) {
         selectedPollID = value
     }
@@ -90,23 +89,22 @@
           addValueToOption(pollTemp, pollID, 1)
         })
       }
-      router.push("/").then(() => {
-        document.location.reload()
-      })
-      userActionStatus.setStatus("voted")
+      router.push("/")
+      useUserActionStatus().setStatus("voted")
     }
 </script>
 
 <template>
 
-  <sl-dialog label="Dialog" ref="dialog" class="dialog-overview">
-    Czy na pewno chcesz zagłosować na tą opcję?
-    <sl-button slot="footer" variant="primary" @click.prevent="submit()">Kontynuuj</sl-button>
-    <sl-button slot="footer" variant="default">Cofnij</sl-button>
 
-  </sl-dialog>
 
   <div class="detail">
+    <sl-dialog label="Dialog" ref="dialog" class="dialog-overview">
+      Czy na pewno chcesz zagłosować na tą opcję?
+      <sl-button slot="footer" variant="primary" @click.prevent="submit()">Kontynuuj</sl-button>
+      <sl-button slot="footer" variant="default">Cofnij</sl-button>
+
+    </sl-dialog>
         <div class="headingWrapper" v-if="heading != ''">
                 <span>{{heading}}</span>
                 <span class="creator"><router-link to="/">

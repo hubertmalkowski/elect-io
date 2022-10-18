@@ -102,34 +102,36 @@ import { changePolStatus } from "@/queries/changePollStatus";
 </script>
 
 <template>
+  <div class="wrapper">
+
     <div class="detail">
-        <img :src="imageLink">
-        
-        <div class="headingWrapper" v-if="heading != ''">
-            <span>{{heading}}</span>
-            <span class="creator"><router-link to="/">
+      <img :src="imageLink">
+
+      <div class="headingWrapper" v-if="heading != ''">
+        <span>{{heading}}</span>
+        <span class="creator"><router-link to="/">
                 {{creatorName}}
             </router-link></span>
-            </div>
-        <div class="descriptionWrapper" >
+      </div>
+      <div class="descriptionWrapper" >
             <span class="body-medium" v-if="description != ''">
                 {{description}}
             </span>
-            <span class="body-medium" v-else>
+        <span class="body-medium" v-else>
                 No description.
             </span>
-        </div>
-        <div class="button">
-            <sl-button @click="deactivate" variant="danger" outline size="large" pill v-if="isPriviliged && isActive">
-                <span slot="prefix" class="material-symbols-outlined">toggle_off</span>Deactivate
-            </sl-button>
-            <sl-button @click="activate" variant="primary" outline size="large" pill v-else-if="isPriviliged && !isActive">
-                <span slot="prefix" class="material-symbols-outlined">toggle_on</span>Activate
-            </sl-button>
-            <sl-button variant="primary" @click="router.push(`/poll-edit/${pollID}`)" outline size="large" pill v-if="isPriviliged">Edytuj</sl-button>
-            <sl-button v-if="canVote" variant="primary" @click="router.push('/poll-vote/' + pollID)" size="large" pill>Głosuj</sl-button>
-            <sl-button v-else variant="primary" disabled size="large" pill>Głosuj</sl-button>
-        </div>
+      </div>
+      <div class="button">
+        <sl-button @click="deactivate" variant="danger" outline size="large" pill v-if="isPriviliged && isActive">
+          <span slot="prefix" class="material-symbols-outlined">toggle_off</span>Deactivate
+        </sl-button>
+        <sl-button @click="activate" variant="primary" outline size="large" pill v-else-if="isPriviliged && !isActive">
+          <span slot="prefix" class="material-symbols-outlined">toggle_on</span>Activate
+        </sl-button>
+        <sl-button variant="primary" @click="router.push(`/poll-edit/${pollID}`)" outline size="large" pill v-if="isPriviliged">Edytuj</sl-button>
+        <sl-button v-if="canVote" variant="primary" @click="router.push('/poll-vote/' + pollID)" size="large" pill>Głosuj</sl-button>
+        <sl-button v-else variant="primary" disabled size="large" pill>Głosuj</sl-button>
+      </div>
       <div class="chart" v-if="isPriviliged">
         <canvas ref="chart">
 
@@ -138,6 +140,8 @@ import { changePolStatus } from "@/queries/changePollStatus";
 
       </div>
     </div>
+
+  </div>
 </template>
 
 <style scoped>
@@ -145,12 +149,18 @@ import { changePolStatus } from "@/queries/changePollStatus";
         display: flex;
         flex-direction: column;
     }
+
+    .wrapper {
+      height: 100vh;
+      overflow-y: scroll;
+    }
     .detail {
         display: flex;
         flex-direction: column;
         border-radius: 12px;
         height: fit-content;
         width: 100%;
+
     }
 
     .headingWrapper {
