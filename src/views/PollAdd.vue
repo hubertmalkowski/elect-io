@@ -65,7 +65,9 @@ function f(test : any) {
   // })
   // sanity is low, I repeat - sanity is low...
 
-  router.push("/my-polls")
+  router.push("/my-polls").then(() => {
+    document.location.reload()
+  })
   userActionStatus.setStatus("addedPoll")
 }
 
@@ -77,7 +79,7 @@ function f(test : any) {
 
  <div>
 
-<!--   Ogólnie to jak będziesz brał options to dostaniesz array obiektów złożonych z
+   <!--   Ogólnie to jak będziesz brał options to dostaniesz array obiektów złożonych z
         - name
         - id
         do zapytania do bazy bierz tylko name; id jest po to by działał dobrze draggable
