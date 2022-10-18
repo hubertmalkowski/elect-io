@@ -89,7 +89,9 @@
           addValueToOption(pollTemp, pollID, 1)
         })
       }
-      router.push("/")
+      router.push("/").then(() => {
+        document.location.reload()
+      })
       useUserActionStatus().setStatus("voted")
     }
 </script>
