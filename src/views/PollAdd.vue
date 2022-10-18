@@ -6,14 +6,11 @@ import { useRouter } from "vue-router";
 
 import app from "../FirebaseInit"
 import { getAuth } from "firebase/auth";
-// import { getStorage, uploadBytes, ref as ref2 } from "firebase/storage"
 
 import { createNewPoll } from "@/queries/createNewPoll";
 import {useUserActionStatus} from "@/stores/status";
-// import { setDoc } from "@firebase/firestore";
 
 const auth = getAuth(app)
-// const storage = getStorage(app)
 
 const router = useRouter()
 
@@ -44,11 +41,7 @@ function f(test : any) {
   userActionStatus.setStatus("addedPoll")
 }
 
-const samplePoll = ref({
-  name: "testowy formularz przekazany przez form",
-  description: "deskrypcja tego forma",
-  type: "radio"
-})
+
 
 </script>
 
@@ -61,7 +54,7 @@ const samplePoll = ref({
         - id
         do zapytania do bazy bierz tylko name; id jest po to by działał dobrze draggable
 -->
-   <PollAddEditForm :poll="samplePoll" @submit="f"></PollAddEditForm>
+   <PollAddEditForm    @submit="f"></PollAddEditForm>
 
  </div>
 

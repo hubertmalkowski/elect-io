@@ -3,6 +3,7 @@
     import { useRoute, useRouter } from "vue-router";
     import { getPollDetail } from "@/queries/getPollDetail";
     import { getOptionsFromPoll } from "@/queries/getOptionsFromPoll";
+    import '@shoelace-style/shoelace/dist/components/dialog/dialog.js';
 
     import app from "../FirebaseInit";
     import { getAuth } from "firebase/auth";
@@ -11,6 +12,8 @@
     import type { Option } from "@/types/option"
     import { addValueToOption } from "@/queries/addValueToOption";
     import CheckboxVoting from "../components/CheckboxVoting.vue";
+    import {SlDialog} from "@shoelace-style/shoelace";
+    import {useUserActionStatus} from "@/stores/status";
     
     const options = ref<Array<Option>>([])
 
@@ -46,20 +49,12 @@
     let selectedPollID: string = ""
     let selectedPollsIDs: Array<string> = []
 
+
+    const dialog = ref<SlDialog | null>(null)
     onMounted(() => {
         test.value!.onsubmit = (event) => {
-            event.preventDefault()            
-            if(selectedPollID.length > 1 && selectedPollsIDs.length < 1) {
-                addValueToOption(selectedPollID, pollID, 1)
-            } else if(selectedPollID.length < 1 && selectedPollsIDs.length > 0) {
-                selectedPollsIDs.forEach((pollTemp) => {
-                    console.log(pollTemp);
-                    
-                    addValueToOption(pollTemp, pollID, 1)
-                })
-            }
-            router.push("/")
-            alert("odddano głos")
+          event.preventDefault()
+          dialog.value!.show()
         }
     })
 
@@ -83,10 +78,32 @@
     function voteChanged(value: string) {
         selectedPollID = value
     }
+
+    function submit() {
+      if(selectedPollID.length > 1 && selectedPollsIDs.length < 1) {
+        addValueToOption(selectedPollID, pollID, 1)
+      } else if(selectedPollID.length < 1 && selectedPollsIDs.length > 0) {
+        selectedPollsIDs.forEach((pollTemp) => {
+          console.log(pollTemp);
+
+          addValueToOption(pollTemp, pollID, 1)
+        })
+      }
+      router.push("/")
+      useUserActionStatus().setStatus("voted")
+    }
 </script>
 
 <template>
-    <div class="detail">
+
+  <sl-dialog label="Dialog" ref="dialog" class="dialog-overview">
+    Czy na pewno chcesz zagłosować na tą opcję?
+    <sl-button slot="footer" variant="primary" @click.prevent="submit()">Kontynuuj</sl-button>
+    <sl-button slot="footer" variant="default">Cofnij</sl-button>
+
+  </sl-dialog>
+
+  <div class="detail">
         <div class="headingWrapper" v-if="heading != ''">
                 <span>{{heading}}</span>
                 <span class="creator"><router-link to="/">
@@ -134,5 +151,9 @@
 
     sl-button {
         float: right;
+    }
+
+    sl-button[variant='default'] {
+      margin-right: 10px;
     }
 </style>

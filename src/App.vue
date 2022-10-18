@@ -59,11 +59,21 @@ watch(() => route.name, () => {
 
 
 const successToast = ref<SlAlert | null>(null)
+const votedToast = ref<SlAlert | null>(null)
 
 //Status watcher
 userActionStatus.$subscribe((mutation, state) => {
   if (state.status == "addedPoll") {
     successToast.value!.toast()
+  }
+
+  switch (state.status) {
+    case "addedPoll":
+      successToast.value!.toast(); break;
+    case "voted":
+      votedToast.value!.toast(); break;
+
+
   }
 })
 
@@ -80,6 +90,11 @@ userActionStatus.$subscribe((mutation, state) => {
     <sl-icon slot="icon" name="check2-circle"></sl-icon>
     <strong>Dodano twój sondaż :)</strong><br />
     Teraz się zrelaksuj i poczekaj na wyniki sondażu
+  </sl-alert>
+  <sl-alert variant="success" duration="5000" closable ref="votedToast">
+    <sl-icon slot="icon" name="check-circle"></sl-icon>
+    <strong>Dziękujemy za głos :)</strong><br />
+    Twój głos zostanie usłyszany :)
   </sl-alert>
 
 
