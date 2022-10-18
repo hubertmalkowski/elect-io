@@ -7,6 +7,7 @@ import Settings from '../views/Settings.vue'
 import PollDetail from '../views/PollDetail.vue'
 import PollVote from '../views/PollVote.vue'
 import PollAdd from '../views/PollAdd.vue'
+import PollEdit from '../views/PollEdit.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -56,7 +57,7 @@ const router = createRouter({
     {
       path: '/poll-edit/:id',
       name: 'poll-edit',
-      component: PollAdd
+      component: PollEdit
     }
 
   ]
