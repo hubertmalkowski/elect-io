@@ -1,39 +1,3 @@
-<template>
-<form @submit.prevent="submit">
-  <section class="fields">
-    <div class="button" >
-      <h2>Nowy sondaż</h2>
-      <sl-button variant="primary" type="submit" size="large">Zapisz</sl-button>
-    </div>
-    <sl-input label="Nazwa"
-              :value="poll.name"
-              @sl-input="poll.name = $event.target.value"></sl-input>
-
-    <sl-input label="Typ"
-              :value="poll.type"
-              @sl-input="poll.type = $event.target.value"></sl-input>
-
-    <sl-textarea label="Opis"
-                 resize="none"
-                 :value="poll.description"
-                 @sl-input="poll.description = $event.target.value"
-    ></sl-textarea>
-    <input type="file"
-           accept="image/gif, image/png, image/jpg"
-           :value="imager"
-           @input="imager = $event.target.value"
-    >
-  </section>
-  <section>
-    <div class="button">
-      <h3>Opcje</h3>
-      <sl-button variant="default" @click="add" pill>Add</sl-button>
-    </div>
-    <DraggableOptionEdit :options="options" @change="test"/>
-  </section>
-</form>
-
-</template>
 <script setup lang="ts">
 import '@shoelace-style/shoelace/dist/components/textarea/textarea';
 import DraggableOptionEdit from "@/components/DraggableOptionEdit.vue";
@@ -76,6 +40,9 @@ const poll = ref<Object>()
 const imager = ref<String>()
 
 
+const fileInput = ref<HTMLInputElement | null>(null)
+
+
 //@ts-ignore
 options.value = props.options
 poll.value = props.poll
@@ -93,13 +60,52 @@ function add() {
   )
 }
 const emit = defineEmits([
-    'submit'
+  'submit'
 ])
 function submit() {
-  console.log("sex")
-  emit('submit', {options: options.value, poll: poll.value, image: imager.value})
+
+  emit('submit', {options: options.value, poll: poll.value, image: (fileInput.value!.files!.length > 0) ? fileInput.value!.files![0] : null})
 }
 </script>
+
+
+<template>
+<form @submit.prevent="submit">
+  <section class="fields">
+    <div class="button" >
+      <h2>Nowy sondaż</h2>
+      <sl-button variant="primary" type="submit" size="large">Zapisz</sl-button>
+    </div>
+    <sl-input label="Nazwa"
+              :value="poll.name"
+              @sl-input="poll.name = $event.target.value"></sl-input>
+
+    <sl-input label="Typ"
+              :value="poll.type"
+              @sl-input="poll.type = $event.target.value"></sl-input>
+
+    <sl-textarea label="Opis"
+                 resize="none"
+                 :value="poll.description"
+                 @sl-input="poll.description = $event.target.value"
+    ></sl-textarea>
+    <input type="file"
+           accept="image/gif, image/png, image/jpg"
+           :value="imager"
+           @input="imager = $event.target.value"
+           ref="fileInput"
+    >
+  </section>
+  <section>
+    <div class="button">
+      <h3>Opcje</h3>
+      <sl-button variant="default" @click="add" pill>Add</sl-button>
+    </div>
+    <DraggableOptionEdit :options="options" @change="test"/>
+  </section>
+</form>
+
+</template>
 
 <style scoped>
 
