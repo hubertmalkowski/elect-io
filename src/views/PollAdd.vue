@@ -6,11 +6,14 @@ import { useRouter } from "vue-router";
 
 import app from "../FirebaseInit"
 import { getAuth } from "firebase/auth";
+import { getStorage, uploadBytes, getDownloadURL, ref as fref } from "firebase/storage";
 
 import { createNewPoll } from "@/queries/createNewPoll";
 import {useUserActionStatus} from "@/stores/status";
+import { setDoc, updateDoc } from "@firebase/firestore";
 
 const auth = getAuth(app)
+const storage = getStorage(app)
 
 const router = useRouter()
 
@@ -35,7 +38,32 @@ function f(test : any) {
     test.poll.description,
     test.poll.type,
     options
-  )
+  ).then((newPoll) => {
+    if(test.image){
+      const storageRef = fref(storage, test.image.name)
+      uploadBytes(storageRef, test.image).then((snapshot) => {
+        getDownloadURL(snapshot.ref).then((value) => {
+          updateDoc(newPoll, {
+            image: value
+          })
+        })
+      })
+    }
+  })
+  // an attempt at adding image
+  // ).then((newPoll) => {
+  //   let imageTemp
+  //   if (test.image){
+  //     const storageRef = ref2(storage, "files/${file.name}")
+  //   uploadBytes(storageRef, test.image).then((snapshot) => {
+  //     imageTemp = snapshot.metadata.name
+  //   })
+  //   setDoc(newPoll, {
+  //     image: imageTemp
+  //   })
+  // }
+  // })
+  // sanity is low, I repeat - sanity is low...
 
   router.push("/my-polls")
   userActionStatus.setStatus("addedPoll")
