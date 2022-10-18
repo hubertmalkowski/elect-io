@@ -1,5 +1,6 @@
 <script lang="ts" setup>
 import '@shoelace-style/shoelace/dist/components/input/input.js';
+import {onMounted, ref} from "vue";
 
 const props = defineProps({
   img: {
@@ -28,7 +29,15 @@ const props = defineProps({
   }
 
 })
+const desc = ref("")
 
+onMounted(() => {
+  desc.value = props.description.substr(0, 70)
+  if(props.description.length > 70) {
+    desc.value+= "..."
+
+  }
+})
 
 const emit = defineEmits([
   'action'
@@ -55,7 +64,7 @@ function action() {
     </div>
     <div v-if="description != null" class="descriptionWrapper">
       <span class="body-medium">
-        {{ description }}
+        {{ desc }}
       </span>
     </div>
     <div v-if="actionLabel != null" class="actionsWrapper">

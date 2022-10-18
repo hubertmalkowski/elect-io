@@ -32,7 +32,6 @@
       <!-- i got annoyed by that fricking warn remove when adding user display -->
       <!-- <RouterLink to="/user"> -->
         <div class="user-icon">
-          <sl-avatar initials="SL" label="Avatar with initials: SL"></sl-avatar>
           <div class="subtitle-1">{{name}}</div>
         </div>
 
@@ -47,8 +46,6 @@
               <sl-menu-item > <router-link to="/settings">Settings</router-link> </sl-menu-item>
               <sl-divider></sl-divider>
               <sl-menu-item @click="signOut(auth)" class="sign-out"> Sign out </sl-menu-item>
-
-
             </sl-menu>
           </sl-dropdown>
         </div>
