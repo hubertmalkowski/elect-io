@@ -82,6 +82,9 @@
             </span>
         </div>
         <div class="button">
+            <sl-button variant="danger" outline size="large" pill v-if="isPriviliged"><span slot="prefix" class="material-symbols-outlined">
+delete_forever
+</span>Disactivate</sl-button>
             <sl-button variant="primary" outline size="large" pill v-if="isPriviliged">Edytuj</sl-button>
             <sl-button v-if="canVote" variant="primary" @click="router.push('/poll-vote/' + pollID)" size="large" pill>Głosuj</sl-button>
             <sl-button v-else variant="primary" disabled size="large" pill>Głosuj</sl-button>

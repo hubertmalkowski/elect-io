@@ -21,7 +21,8 @@ export async function createNewPoll(name: string, creator: string, creatorUID: s
         description: description,
         type: type,
         history: [],
-        image: ""
+        image: "",
+        active: true
     }
 
     const newPoll = await addDoc(collection(db, "polls"), pollData)
