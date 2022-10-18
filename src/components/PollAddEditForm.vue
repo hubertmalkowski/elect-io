@@ -89,7 +89,7 @@ function submit() {
                  @sl-input="poll.description = $event.target.value"
     ></sl-textarea>
     <input type="file"
-           accept="image/gif, image/png, image/jpg"
+           accept="image/gif, image/png, image/jpg, image/jpeg"
            :value="imager"
            @input="imager = $event.target.value"
            ref="fileInput"

@@ -40,7 +40,7 @@ function f(test : any) {
     options
   ).then((newPoll) => {
     if(test.image){
-      const storageRef = fref(storage, test.image.name)
+      const storageRef = fref(storage, new Date().getTime().toString() + auth.currentUser!.uid)
       uploadBytes(storageRef, test.image).then((snapshot) => {
         getDownloadURL(snapshot.ref).then((value) => {
           updateDoc(newPoll, {
