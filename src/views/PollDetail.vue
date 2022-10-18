@@ -100,7 +100,7 @@ import { changePolStatus } from "@/queries/changePollStatus";
             <sl-button @click="activate" variant="primary" outline size="large" pill v-else-if="isPriviliged && !isActive">
                 <span slot="prefix" class="material-symbols-outlined">toggle_on</span>Activate
             </sl-button>
-            <sl-button variant="primary" outline size="large" pill v-if="isPriviliged">Edytuj</sl-button>
+            <sl-button variant="primary" @click="router.push(`/poll-edit/${pollID}`)" outline size="large" pill v-if="isPriviliged">Edytuj</sl-button>
             <sl-button v-if="canVote" variant="primary" @click="router.push('/poll-vote/' + pollID)" size="large" pill>Głosuj</sl-button>
             <sl-button v-else variant="primary" disabled size="large" pill>Głosuj</sl-button>
         </div>

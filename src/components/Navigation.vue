@@ -26,6 +26,7 @@
           <div class="subtitle-1">Poll add (TEMPORARY LOCATION)</div>
         </div>
       </router-link>
+
     </nav>
 
     <div class="user">
