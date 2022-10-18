@@ -4,6 +4,8 @@
 import PollAddEditForm from "@/components/PollAddEditForm.vue";
 import { getOptionsFromPoll } from "@/queries/getOptionsFromPoll";
 import { getPollDetail } from "@/queries/getPollDetail";
+import { updatePollDetail } from "@/queries/updatePollDetail";
+import router from "@/router";
 import type { Option } from "@/types/option";
 
 import { ref, onMounted } from "vue";
@@ -34,22 +36,18 @@ onMounted(async () => {
   poll.value.name = newPoll!.name
   poll.value.description = newPoll!.description
   poll.value.type = newPoll!.type
-
-  const tempOptions = await getOptionsFromPoll(pollID)
-  tempOptions.forEach((option) => {
-    console.log(option);
-    
-    options.value.push({
-      name: option.name,
-      id: Math.random().toString()
-    })
-  })
 })
 
-function submit(target : any) {
+async function submit(target : any) {
   console.log(target.poll)
-  console.log(target.image)
-  console.log(target.option)
+  // console.log(target.image)
+  console.log(target.options)
+  const newOptions = target.options.map((element: { name: any; }) => element.name)
+  console.log(newOptions);
+  
+
+  await updatePollDetail(target.poll.name, target.poll.description, target.poll.type, newOptions, target.image, pollID)
+  router.push("/my-polls")
 
 }
 </script>
