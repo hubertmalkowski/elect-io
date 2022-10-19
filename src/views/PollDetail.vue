@@ -7,7 +7,7 @@
     import { getAuth } from "firebase/auth";
     import { getPollHistory } from "@/queries/getPollHistory";
     import { getOptionsValuesFromPoll } from "@/queries/getOptionsValuesFromPoll";
-import { changePolStatus } from "@/queries/changePollStatus";
+    import { changePolStatus } from "@/queries/changePollStatus";
     import {Chart, registerables} from "chart.js";
     Chart.register(...registerables)
     const route = useRoute()
@@ -42,13 +42,13 @@ import { changePolStatus } from "@/queries/changePollStatus";
                 if (poll.creatorUID == currentUser){
                     isPriviliged.value = true
                 }
-                if (isPriviliged){
+                if (isPriviliged.value){
                     getOptionsValuesFromPoll(pollID).then((options) => {
                         options.forEach((option) => {
                             votes.value.push(option)
                         })
+                      console.log("bdfskja")
                       setupChart()
-
                     })
                 }
 

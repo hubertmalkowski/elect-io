@@ -13,7 +13,7 @@ const grid = ref<HTMLElement | null>(null)
 
 const props = defineProps( {
   stagger: {
-    type: Boolean,
+    type: Boolean!,
     default: false
   }
 })

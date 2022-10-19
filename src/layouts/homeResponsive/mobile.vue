@@ -1,5 +1,5 @@
 <template>
-  <sl-drawer ref="drawer" label="Menu ">
+  <sl-drawer ref="drawer" label="Menu " @sl-hide="drawerOpen = !drawerOpen">
     <Navigation/>
 
   </sl-drawer>

@@ -32,7 +32,7 @@
   const router = useRouter()
 
   const testPolls = ref<Array<Poll>>([])
-  const stagger = ref<Boolean>(false)
+  const stagger = ref(false)
 
   onMounted(async () => {
     //retrieve data

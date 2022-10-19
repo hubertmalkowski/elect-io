@@ -58,7 +58,7 @@ async function submit(target : any) {
 
 <template>
 
-  <PollAddEditForm heading="Edytuj sondaż" :poll="poll" :options="options" @submit="submit" :is-loading="isLoading"></PollAddEditForm>
+  <PollAddEditForm heading="Edytuj sondaż" if-edit :poll="poll" :options="options" @submit="submit" :is-loading="isLoading"></PollAddEditForm>
 
 
 </template>

@@ -37,6 +37,10 @@ const props = defineProps({
   isLoading: {
     type: Boolean,
     default: false
+  },
+  ifEdit: {
+    type: Boolean,
+    default: false
   }
 
 })
@@ -44,7 +48,7 @@ const props = defineProps({
 
 const options = ref<Array<Option>>()
 
-const poll = ref<Object>()
+const poll = ref<any>()
 
 const imager = ref<String>()
 
@@ -72,37 +76,56 @@ const emit = defineEmits([
   'submit'
 ])
 function submit() {
-  console.log(options.value)
+
   if (validate()) {
     emit('submit', {options: options.value, poll: poll.value, image: (fileInput.value!.files!.length > 0) ? fileInput.value!.files![0] : null})
   }
-  else {
-    console.log("pierdole")
+
+
+}
+
+
+function validateOptions() : String[] {
+  const errors : Array<String> = new Array<String>()
+
+  if (options.value!.length < 2 && !props.ifEdit ) {
+    errors.push("Sondaż powinien mieć przynajmniej 2 opcje")
   }
-}
-
-
-function validate() : boolean {
-  const checklist : Map<String, Boolean> = new Map([
-      ["Options", validateOptions()],
-  ])
-
-  let result = true
-
-  checklist.forEach((value, key, map) => {
-    if (!value) {
-      result = false
-    }
-  })
-
-  return result
-}
-
-function validateOptions() : Boolean {
   if (options.value!.length > 0) {
-    return options.value!.every(element => element.name != "")
+    if(!options.value!.every(element => element.name != "")) {
+      errors.push("Sondaż nie może mieć pustych opcji")
+    }
   }
-  return true
+  return errors
+}
+
+function validate() {
+  const optionValidation = validateOptions()
+  const fieldValidation = validateFields()
+  console.table(optionValidation)
+  console.table(fieldValidation)
+  return !(optionValidation.length > 0 && fieldValidation.length > 0);
+
+
+}
+
+
+function validateFields() : String[] {
+  const errors : Array<String> = new Array<String>()
+
+  if (poll.value.name == "") {
+    errors.push("Należy zdefiniować nazwę Sondażu")
+  }
+
+  if (poll.value.type == "") {
+    errors.push("Należy zdefiniować typ")
+  }
+
+  if (poll.value.description == "") {
+    errors.push("Należy napisać opis sondażu")
+  }
+
+  return errors
 }
 </script>
 
@@ -135,8 +158,6 @@ function validateOptions() : Boolean {
     ></sl-textarea>
     <input type="file"
            accept="image/gif, image/png, image/jpg, image/jpeg"
-           :value="imager"
-           @input="imager = $event.target.value"
            ref="fileInput"
     >
   </section>

@@ -8,7 +8,7 @@
       </span>
           <sl-input placeholder="Option Name"
                     :value="element.name"
-                    @sl-input="(event) => {element.name = event.target.value; change()}"
+                    @sl-input="(event : any) => {element.name = event.target.value; change()}"
           ></sl-input>
           <span class="material-symbols-outlined delete" @click="deleteElement(element.id)">
         remove_circle
@@ -45,8 +45,9 @@ function deleteElement(id : string) {
   emit('change', props.options)
 }
 
-function change() {
+function change() : Function {
   emit('change', props.options)
+  return () => {console.log("")}
 }
 
 
