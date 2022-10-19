@@ -6,11 +6,11 @@ import { getPollHistory } from "./getPollHistory";
 
 
 
-export async function getAllPolls() {
+export async function getAllPollsFromHistory() {
     const db = getFirestore(app)
     const auth = getAuth(app)
     const pollsRef = collection(db, "polls")
-    const q = query(pollsRef, where("active", "==", true), orderBy("date", "desc"))
+    const q = query(pollsRef, where("active", "==", true), where("history", "array-contains", auth.currentUser?.uid), orderBy("date", "desc"))
     const querySnapshot = await getDocs(q)
     let polls: Array<Poll> = []
 
@@ -27,9 +27,6 @@ export async function getAllPolls() {
         active: data.active,
         image: data.image
       }
-
-      //if user already saw ignore and do not push
-      if (doc.data().history && auth.currentUser && doc.data().history.includes(auth.currentUser.uid)) return
 
       polls.push(tempPoll) 
     })

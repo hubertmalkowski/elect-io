@@ -8,6 +8,7 @@ import PollDetail from '../views/PollDetail.vue'
 import PollVote from '../views/PollVote.vue'
 import PollAdd from '../views/PollAdd.vue'
 import PollEdit from '../views/PollEdit.vue'
+import History from '../views/History.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -33,6 +34,11 @@ const router = createRouter({
       path: '/my-polls',
       name: 'my-polls',
       component: MyPolls
+    },
+    {
+      path: '/history',
+      name: 'history',
+      component: History
     },
     {
       path: '/settings',

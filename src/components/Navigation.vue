@@ -4,8 +4,11 @@
     <nav>
       <router-link to="/" class="link">
         <div class="navItem">
-          <span class="material-symbols-outlined">
+          <!-- <span class="material-symbols-outlined">
             dashboard
+          </span> -->
+          <span class="material-symbols-outlined">
+            how_to_vote
           </span>
           <div class="subtitle-1">Sondaże</div>
         </div>
@@ -18,15 +21,22 @@
           <div class="subtitle-1">Moje sondaże</div>
         </div>
       </router-link>
+      <router-link to="/history" class="link">
+        <div class="navItem">
+          <span class="material-symbols-outlined">
+            history
+          </span>
+          <div class="subtitle-1">Historia</div>
+        </div>
+      </router-link>
       <router-link to="/poll-add" class="link">
         <div class="navItem">
           <span class="material-symbols-outlined">
             add
           </span>
-          <div class="subtitle-1">Poll add (TEMPORARY LOCATION)</div>
+          <div class="subtitle-1">Dodaj sondaż</div>
         </div>
       </router-link>
-
     </nav>
 
     <div class="user">
