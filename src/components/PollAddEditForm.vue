@@ -72,7 +72,37 @@ const emit = defineEmits([
   'submit'
 ])
 function submit() {
-  emit('submit', {options: options.value, poll: poll.value, image: (fileInput.value!.files!.length > 0) ? fileInput.value!.files![0] : null})
+  console.log(options.value)
+  if (validate()) {
+    emit('submit', {options: options.value, poll: poll.value, image: (fileInput.value!.files!.length > 0) ? fileInput.value!.files![0] : null})
+  }
+  else {
+    console.log("pierdole")
+  }
+}
+
+
+function validate() : boolean {
+  const checklist : Map<String, Boolean> = new Map([
+      ["Options", validateOptions()],
+  ])
+
+  let result = true
+
+  checklist.forEach((value, key, map) => {
+    if (!value) {
+      result = false
+    }
+  })
+
+  return result
+}
+
+function validateOptions() : Boolean {
+  if (options.value!.length > 0) {
+    return options.value!.every(element => element.name != "")
+  }
+  return true
 }
 </script>
 
