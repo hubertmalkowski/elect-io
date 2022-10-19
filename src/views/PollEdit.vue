@@ -46,7 +46,7 @@ async function submit(target : any) {
   console.log(newOptions);
   
 
-  await updatePollDetail(target.poll.name, target.poll.description, target.poll.type, newOptions, target.image, pollID)
+  await updatePollDetail(target.poll.name, target.poll.description, target.poll.type, target.image, newOptions, pollID)
   router.push("/my-polls")
 
 }

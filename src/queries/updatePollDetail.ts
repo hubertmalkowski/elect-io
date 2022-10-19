@@ -45,10 +45,14 @@ export async function updatePollDetail(name: string, description: string, type: 
         image: imgURL,
         active: oldPoll?.active
     }
-
+    console.log(pollData);
+    
     const pollRef = doc(db, "polls/" + pollID)
     await setDoc(pollRef, pollData)
 
+    if(newOptions.length < 1) {
+        return
+    }
     const optsRef = collection(db, "polls/" + pollID + "/options")
 
     newOptions.forEach(async (option, index) => {
