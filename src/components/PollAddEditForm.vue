@@ -28,7 +28,12 @@ const props = defineProps({
   image: {
     type: String,
     default: ""
-  }
+  },
+  heading: {
+    type: String,
+    default: "New Poll"
+  },
+
 
 })
 
@@ -72,7 +77,7 @@ function submit() {
 <form @submit.prevent="submit">
   <section class="fields">
     <div class="button" >
-      <h2>Nowy sondaż</h2>
+      <h2>{{heading}}</h2>
       <sl-button variant="primary" type="submit" size="large">Zapisz</sl-button>
     </div>
     <sl-input label="Nazwa"
