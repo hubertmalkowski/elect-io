@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import '@shoelace-style/shoelace/dist/components/textarea/textarea';
+import '@shoelace-style/shoelace/dist/components/select/select';
 import DraggableOptionEdit from "@/components/DraggableOptionEdit.vue";
 import {ref, toRaw} from "vue";
 import type {Option} from "@/types/option";
@@ -84,9 +85,15 @@ function submit() {
               :value="poll.name"
               @sl-input="poll.name = $event.target.value"></sl-input>
 
-    <sl-input label="Typ"
-              :value="poll.type"
-              @sl-input="poll.type = $event.target.value"></sl-input>
+    <sl-select label="Typ"
+               :value="poll.type"
+               @sl-change="poll.type = $event.target.value"
+     >
+      <sl-menu-item value="radio">Pojedyńczy wybór</sl-menu-item>
+      <sl-menu-item value="checkbox">Wielokrotny wybór</sl-menu-item>
+
+
+    </sl-select>
 
     <sl-textarea label="Opis"
                  resize="none"
@@ -133,6 +140,7 @@ h2 {
 form {
   height: 100vh;
   overflow-y: scroll;
+  padding-inline: 14px;
 }
 
 </style>
