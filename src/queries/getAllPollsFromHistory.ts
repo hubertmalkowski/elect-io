@@ -10,7 +10,7 @@ export async function getAllPollsFromHistory() {
     const db = getFirestore(app)
     const auth = getAuth(app)
     const pollsRef = collection(db, "polls")
-    const q = query(pollsRef, where("active", "==", true), where("history", "array-contains", auth.currentUser?.uid), orderBy("date", "desc"))
+    const q = query(pollsRef, where("history", "array-contains", auth.currentUser?.uid), orderBy("date", "desc"))
     const querySnapshot = await getDocs(q)
     let polls: Array<Poll> = []
 

@@ -35,4 +35,9 @@
         display: flex;
         flex-direction: column;
     }
+
+    sl-checkbox::part(control) {
+    --sl-color-primary-600: var(--Color-Primary-500);
+    --sl-color-primary-500: var(--Color-Primary-400)
+    }
 </style>

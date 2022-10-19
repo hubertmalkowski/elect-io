@@ -27,7 +27,7 @@
 </script>
 
 <template>
-    <sl-radio-group fieldset @sl-change="callback">
+    <sl-radio-group @sl-change="callback">
         <sl-radio :value="i.id"  v-for="i in options">{{i.name}}</sl-radio>
     </sl-radio-group>
 </template>
@@ -39,5 +39,6 @@
 
     sl-radio::part(control) {
     --sl-color-primary-600: var(--Color-Primary-500);
+    --sl-color-primary-500: var(--Color-Primary-400)
     }
 </style>
