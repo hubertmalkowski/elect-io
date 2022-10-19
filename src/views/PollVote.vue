@@ -102,7 +102,7 @@
     <sl-dialog label="Dialog" ref="dialog" class="dialog-overview">
       Czy na pewno chcesz zagłosować na tą opcję?
       <sl-button slot="footer" variant="primary" @click.prevent="submit()">Kontynuuj</sl-button>
-      <sl-button slot="footer" variant="default">Cofnij</sl-button>
+      <sl-button slot="footer" variant="default" @click="dialog.close()">Cofnij</sl-button>
 
     </sl-dialog>
         <div class="headingWrapper" v-if="heading != ''">
