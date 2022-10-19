@@ -19,7 +19,7 @@ export async function getPollDetail(pollID: string) {
             creator: data.creator,
             creatorUID: data.creatorUID,
             description: data.description,
-            expirationDate: data.expirationDate,
+            date: data.date,
             type: data.type,
             active: data.active,
             image: data.image

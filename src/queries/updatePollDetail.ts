@@ -43,7 +43,8 @@ export async function updatePollDetail(name: string, description: string, type: 
         type: type,
         history: oldHistory,
         image: imgURL,
-        active: oldPoll?.active
+        active: oldPoll?.active,
+        date: oldPoll?.date
     }
     console.log(pollData);
     

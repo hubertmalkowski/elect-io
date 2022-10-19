@@ -8,7 +8,7 @@ export interface Poll {
 
     image: string,
     description: string,
-    expirationDate: Date,
+    date: Date,
 
     //typy bedzie trzeba jeszcze przedyskutować jakie mają być dostępne. Na razie róbmy wszystko typu "basic"
     type: string,

@@ -33,7 +33,10 @@ const props = defineProps({
     type: String,
     default: "New Poll"
   },
-
+  isLoading: {
+    type: Boolean,
+    default: false
+  }
 
 })
 
@@ -78,7 +81,7 @@ function submit() {
   <section class="fields">
     <div class="button" >
       <h2>{{heading}}</h2>
-      <sl-button variant="primary" type="submit" size="large">Zapisz</sl-button>
+      <sl-button variant="primary" type="submit" size="large" :loading="isLoading">Zapisz</sl-button>
     </div>
     <sl-input label="Nazwa"
               :value="poll.name"

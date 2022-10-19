@@ -1,6 +1,6 @@
 import app from "../FirebaseInit";
 
-import { getFirestore, collection, setDoc, doc, addDoc } from "firebase/firestore";
+import { getFirestore, collection, setDoc, doc, addDoc, Timestamp } from "firebase/firestore";
 // import {  } from "firebase/storage";
 
 import type { Option } from "@/types/option";
@@ -22,7 +22,8 @@ export async function createNewPoll(name: string, creator: string, creatorUID: s
         type: type,
         history: [],
         image: "",
-        active: true
+        active: true,
+        date: Timestamp.fromDate(new Date())
     }
 
     const newPoll = await addDoc(collection(db, "polls"), pollData)

@@ -38,7 +38,10 @@ onMounted(async () => {
   poll.value.type = newPoll!.type
 })
 
+const isLoading = ref<boolean>(false)
+
 async function submit(target : any) {
+  isLoading.value = true
   console.log(target.poll)
   // console.log(target.image)
   console.log(target.options)
@@ -47,6 +50,7 @@ async function submit(target : any) {
   
 
   await updatePollDetail(target.poll.name, target.poll.description, target.poll.type, target.image, newOptions, pollID)
+  isLoading.value = false
   router.push("/my-polls")
 
 }
@@ -54,7 +58,7 @@ async function submit(target : any) {
 
 <template>
 
-  <PollAddEditForm heading="Edytuj sondaż" :poll="poll" :options="options" @submit="submit"></PollAddEditForm>
+  <PollAddEditForm heading="Edytuj sondaż" :poll="poll" :options="options" @submit="submit" :is-loading="isLoading"></PollAddEditForm>
 
 
 </template>
