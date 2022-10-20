@@ -1,6 +1,6 @@
 <template>
 
-  <draggable v-model="options"  item-key="id" :move="() => {change()}">
+  <draggable v-model="options"  item-key="id" :move="change()">
     <template #item="{element}">
       <div class="flex">
       <span class="material-symbols-outlined drag">
@@ -45,8 +45,9 @@ function deleteElement(id : string) {
   emit('change', props.options)
 }
 
-function change() {
+function change() : Function {
   emit('change', props.options)
+  return () => {}
 }
 
 
