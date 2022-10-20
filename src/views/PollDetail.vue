@@ -151,9 +151,7 @@
     }
 
     .wrapper {
-      height: 100vh;
-      overflow-y: scroll;
-    }
+      height: 100%;    }
     .detail {
         display: flex;
         flex-direction: column;
