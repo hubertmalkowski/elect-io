@@ -62,13 +62,13 @@
 
     function deactivate() {
         changePolStatus(false, pollID)
-        router.push("/my-polls")
-    }
+        isActive.value = false
+      }
 
     function activate() {
         changePolStatus(true, pollID)
-        router.push("/my-polls")
-    }
+        isActive.value = true
+      }
 
     const chart = ref<HTMLCanvasElement | null>(null)
 
@@ -122,11 +122,11 @@
             </span>
       </div>
       <div class="button">
-        <sl-button @click="deactivate" variant="danger" outline size="large" pill v-if="isPriviliged && isActive">
-          <span slot="prefix" class="material-symbols-outlined">toggle_off</span>Deactivate
+        <sl-button @click="deactivate" variant="primary" outline size="large" pill v-if="isPriviliged && isActive">
+          <span slot="prefix" class="material-symbols-outlined">toggle_on</span>Publiczna
         </sl-button>
-        <sl-button @click="activate" variant="primary" outline size="large" pill v-else-if="isPriviliged && !isActive">
-          <span slot="prefix" class="material-symbols-outlined">toggle_on</span>Activate
+        <sl-button @click="activate" variant="danger" outline size="large" pill v-else-if="isPriviliged && !isActive">
+          <span slot="prefix" class="material-symbols-outlined">toggle_off</span>Nie publiczna
         </sl-button>
         <sl-button variant="primary" @click="router.push(`/poll-edit/${pollID}`)" outline size="large" pill v-if="isPriviliged">Edytuj</sl-button>
         <sl-button v-if="canVote" variant="primary" @click="router.push('/poll-vote/' + pollID)" size="large" pill>Głosuj</sl-button>
