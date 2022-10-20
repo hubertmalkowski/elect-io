@@ -142,8 +142,7 @@ sl-spinner {
 }
 
 .container {
-  height: 100vh;
-  overflow-y: scroll;
+  height: 100%;
   padding-right: 4px;
 
 }

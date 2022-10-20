@@ -192,8 +192,7 @@ h2 {
 }
 
 form {
-  height: 100vh;
-  overflow-y: scroll;
+  height: 100%;
   padding-inline: 14px;
 }
 

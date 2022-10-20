@@ -24,7 +24,7 @@
 
 <script setup lang="ts">
 import '@shoelace-style/shoelace/dist/components/drawer/drawer.js';
-import {ref, watch} from "vue";
+import {onMounted, ref, watch} from "vue";
 import {SlDrawer} from "@shoelace-style/shoelace";
 import Navigation from "@/components/Navigation.vue";
 
@@ -39,6 +39,8 @@ watch(drawerOpen, (value) => {
     drawer.value!.hide()
   }
 })
+
+
 
 
 </script>

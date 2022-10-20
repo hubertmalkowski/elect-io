@@ -30,6 +30,8 @@ import Navigation from "@/components/Navigation.vue";
 .router {
   grid-column-start: 3 ;
   grid-column-end: 7;
+  height: 100vh;
+  overflow-y: scroll;
 }
 
 .sidebar {
