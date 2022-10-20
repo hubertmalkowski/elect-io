@@ -76,12 +76,15 @@ const emit = defineEmits([
   'submit'
 ])
 function submit() {
-
   if (validate()) {
     emit('submit', {options: options.value, poll: poll.value, image: (fileInput.value!.files!.length > 0) ? fileInput.value!.files![0] : null})
+    poll.value = {      name: "",
+      description: "",
+      type: ""}
   }
-
-
+  else {
+    console.log("pierdolnbelo cie")
+  }
 }
 
 
@@ -99,12 +102,19 @@ function validateOptions() : String[] {
   return errors
 }
 
+const fieldError = ref<Array<String>>([])
+const optionError = ref<Array<String>>([])
+
+
 function validate() {
   const optionValidation = validateOptions()
   const fieldValidation = validateFields()
-  console.table(optionValidation)
-  console.table(fieldValidation)
-  return !(optionValidation.length > 0 && fieldValidation.length > 0);
+  fieldError.value = fieldValidation
+  optionError.value = optionValidation
+
+
+
+  return !(optionValidation.length > 0 || fieldValidation.length > 0);
 
 
 }
@@ -132,10 +142,15 @@ function validateFields() : String[] {
 
 <template>
 <form @submit.prevent="submit">
+
   <section class="fields">
+
     <div class="button" >
       <h2>{{heading}}</h2>
       <sl-button variant="primary" type="submit" size="large" :loading="isLoading">Zapisz</sl-button>
+    </div>
+    <div class="errors">
+      <span v-for="field in fieldError" class="error">{{field}}<br></span>
     </div>
     <sl-input label="Nazwa"
               :value="poll.name"
@@ -144,7 +159,7 @@ function validateFields() : String[] {
     <sl-select label="Typ"
                :value="poll.type"
                @sl-change="poll.type = $event.target.value"
-     >
+    >
       <sl-menu-item value="radio">Pojedyńczy wybór</sl-menu-item>
       <sl-menu-item value="checkbox">Wielokrotny wybór</sl-menu-item>
 
@@ -162,9 +177,13 @@ function validateFields() : String[] {
     >
   </section>
   <section>
+
     <div class="button">
       <h3>Opcje</h3>
       <sl-button variant="default" @click="add" pill>Add</sl-button>
+    </div>
+    <div class="errors">
+      <span v-for="field in optionError" class="error">{{field}}<br></span>
     </div>
     <DraggableOptionEdit :options="options" @change="test"/>
   </section>
@@ -194,6 +213,10 @@ h2 {
 form {
   height: 100%;
   padding-inline: 14px;
+}
+
+.errors {
+  color: var(--Color-Danger-600);
 }
 
 </style>
