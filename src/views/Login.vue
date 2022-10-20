@@ -27,7 +27,6 @@ async function signIn() {
   .catch((error : any) => {
     const errorCode = error.code;
     const errorMessage = error.message;
-    console.log(errorMessage)
 
     error.value = errorMessage
   });

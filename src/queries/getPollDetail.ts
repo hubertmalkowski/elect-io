@@ -4,8 +4,7 @@ import type { Poll } from "@/types/poll";
 
 export async function getPollDetail(pollID: string) {
     const db = getFirestore(app)
-    // console.log(pollID);
-    
+
     let poll: Poll
 
     const docRef = doc(db, "polls", pollID)
@@ -25,8 +24,7 @@ export async function getPollDetail(pollID: string) {
             image: data.image
         }
     } else{
-        console.log("Document retrievement failed");
-        
+
         return null
     }
 

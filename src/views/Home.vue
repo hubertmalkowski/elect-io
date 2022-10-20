@@ -36,9 +36,7 @@ const stagger = ref(false)
 
 onMounted(async () => {
   //retrieve data
-  console.log("mounted")
   getAllPolls().then((polls) => {
-    console.log("fetched")
     testPolls.value = polls
   })
 })

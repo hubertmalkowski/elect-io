@@ -84,7 +84,6 @@
         addValueToOption(selectedPollID, pollID, 1)
       } else if(selectedPollID.length < 1 && selectedPollsIDs.length > 0) {
         selectedPollsIDs.forEach((pollTemp) => {
-          console.log(pollTemp);
 
           addValueToOption(pollTemp, pollID, 1)
         })

@@ -42,12 +42,9 @@ const isLoading = ref<boolean>(false)
 
 async function submit(target : any) {
   isLoading.value = true
-  console.log(target.poll)
   // console.log(target.image)
-  console.log(target.options)
   const newOptions = target.options.map((element: { name: any; }) => element.name)
-  console.log(newOptions);
-  
+
 
   await updatePollDetail(target.poll.name, target.poll.description, target.poll.type, target.image, newOptions, pollID)
   isLoading.value = false

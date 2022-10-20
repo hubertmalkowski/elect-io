@@ -40,7 +40,6 @@ const polls = ref<Array<{
 
 onMounted(() => {  
   onAuthStateChanged(auth, async () => {
-    console.log("sidebar mount");
 
     const db = getFirestore(app)
     const auth = getAuth(app)
