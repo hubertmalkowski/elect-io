@@ -36,7 +36,7 @@ import { getAllPollsFromHistory } from "@/queries/getAllPollsFromHistory";
 
 import { getAuth, onAuthStateChanged } from "firebase/auth";
 import app from "../FirebaseInit"
-import { collection, getFirestore, onSnapshot, orderBy, query, where } from "@firebase/firestore";
+import { collection, getFirestore, onSnapshot, orderBy, query, where, limit } from "@firebase/firestore";
 
 const auth = getAuth(app)
 
@@ -54,7 +54,7 @@ onMounted(() => {
     const db = getFirestore(app)
     const auth = getAuth(app)
     const pollsRef = collection(db, "polls")
-    const q = query(pollsRef, where("history", "array-contains", auth.currentUser?.uid), orderBy("date", "desc"))
+    const q = query(pollsRef, where("history", "array-contains", auth.currentUser?.uid), orderBy("date", "desc"), limit(6))
 
     const unsubscribe = onSnapshot(q, (querySnapshot) => {
       let tempPolls: Array<{
