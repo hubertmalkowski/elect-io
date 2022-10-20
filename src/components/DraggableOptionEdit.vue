@@ -45,9 +45,8 @@ function deleteElement(id : string) {
   emit('change', props.options)
 }
 
-function change() : Function {
+function change() {
   emit('change', props.options)
-  return () => {console.log("")}
 }
 
 
