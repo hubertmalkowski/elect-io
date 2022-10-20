@@ -150,7 +150,17 @@
     }
 
     .wrapper {
-      height: 100%;    }
+      height: 100%;
+      margin-top: 10px;
+
+    }
+
+    @media screen and (max-width: 960px) {
+      .wrapper {
+        padding-inline: 20px;
+
+      }
+    }
     .detail {
         display: flex;
         flex-direction: column;
