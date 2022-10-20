@@ -1,6 +1,11 @@
 <template>
   <section class="Navigation">
 
+    <header>
+      <h1>Elect.io</h1>
+
+    </header>
+
     <nav>
       <router-link to="/" class="link">
         <div class="navItem">
@@ -105,12 +110,15 @@ onMounted(() => {
 }
 
 
-@media screen and (max-width: 1023px) {
+@media screen and (max-width: 960px) {
   .Navigation {
     padding: 0;
     grid-template-rows: 2.5fr 0.5fr;
     grid-template-areas: "nav" "user";
 
+  }
+  header {
+    display: none;
   }
 }
 
@@ -120,6 +128,21 @@ onMounted(() => {
   align-items: end;
   height: 100%;
   justify-content: space-between;
+}
+
+header {
+  grid-area: heading;
+}
+
+header {
+  font-size: 34px;
+  font-weight: 600;
+  line-height: 61px;
+  letter-spacing: 0em;
+  text-align: left;
+  color: var(--Color-Primary-500);
+  margin: 0;
+
 }
 
 .user .material-icons-outlined {
