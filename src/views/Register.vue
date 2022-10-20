@@ -2,7 +2,13 @@
   import { onMounted, ref } from "vue";
 
   import app from "../FirebaseInit";
-  import { getAuth, createUserWithEmailAndPassword, updateProfile } from "firebase/auth";
+  import {
+    getAuth,
+    createUserWithEmailAndPassword,
+    updateProfile,
+    signInWithPopup,
+    GoogleAuthProvider
+  } from "firebase/auth";
 
   const auth = getAuth(app);
 
@@ -11,6 +17,21 @@
   const password2 = ref<string>("")
 
   const username = ref("")
+
+  const googleProvider = new GoogleAuthProvider()
+  googleProvider.addScope('https://www.googleapis.com/auth/contacts.readonly');
+
+  function signInWithGoogle() {
+    signInWithPopup(auth, googleProvider)
+        .then((result) => {
+          const credential = GoogleAuthProvider.credentialFromResult(result)
+        })
+        .catch((error) => {
+          const errorMessage = error.message
+
+
+        })
+  }
 
   function register() {
     if (password1.value != password2.value) {
@@ -57,16 +78,17 @@
       </div>
 
       <div class="button-wrap">
-        <router-link to="/login">
-          <sl-button type="submit" size="large" pill variant="primary" outline>Zaloguj</sl-button>
-        </router-link>
+
         <sl-button @click="register" size="large" pill variant="primary" >Zarejestruj</sl-button>
       </div>
+
+      <sl-button @click="signInWithGoogle">Sign in with google</sl-button>
+
 
       <!-- not necessary right now -->
       <!-- <sl-button>Register with google</sl-button> -->
       <!-- <sl-button>Register with facebook</sl-button> -->
-
+      <span>Masz już konto? <router-link to="/login">Zaloguj</router-link></span>
     </section>
   </form>
 
