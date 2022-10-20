@@ -82,8 +82,6 @@ function submit() {
       description: "",
       type: ""}
   }
-  else {
-  }
 }
 
 
