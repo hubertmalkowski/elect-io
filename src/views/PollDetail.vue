@@ -125,7 +125,7 @@
           <span slot="prefix" class="material-symbols-outlined">toggle_on</span>Publiczna
         </sl-button>
         <sl-button @click="activate" variant="danger" outline size="large" pill v-else-if="isPriviliged && !isActive">
-          <span slot="prefix" class="material-symbols-outlined">toggle_off</span>Nie publiczna
+          <span slot="prefix" class="material-symbols-outlined">toggle_off</span>Niepubliczna
         </sl-button>
         <sl-button variant="primary" @click="router.push(`/poll-edit/${pollID}`)" outline size="large" pill v-if="isPriviliged">Edytuj</sl-button>
         <sl-button v-if="canVote" variant="primary" @click="router.push('/poll-vote/' + pollID)" size="large" pill>Głosuj</sl-button>
