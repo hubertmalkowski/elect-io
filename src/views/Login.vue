@@ -16,7 +16,7 @@ const password = ref<string>("")
 
 const error = ref<string>("")
 
-function signIn() {
+async function signIn() {
 
   signInWithEmailAndPassword(auth, login.value, password.value)
   .then((userCredential : any) => {
@@ -27,8 +27,9 @@ function signIn() {
   .catch((error : any) => {
     const errorCode = error.code;
     const errorMessage = error.message;
+    console.log(errorMessage)
 
-    error.value = "error"
+    error.value = errorMessage
   });
 }
 
@@ -72,16 +73,16 @@ onMounted(() => {
       <sl-input v-model="password" label="Hasło" type="password" :help-text="error" required password-toggle></sl-input>
     </div>
     <div class="button-wrap">
-      <router-link to="/register">
-        <sl-button size="large" pill variant="primary" outline>Zarejestruj</sl-button>
 
-      </router-link>
       <sl-button @click="signIn" size="large" pill variant="primary" >Zaloguj</sl-button>
     </div>
 
     <sl-button @click="signInWithGoogle">Sign in with google</sl-button>
     <!-- <sl-button>Register with facebook</sl-button> -->
+    <span>Nie masz konta? <router-link to="/register">Zarejestruj</router-link></span>
+
   </section>
+
 </form>
 
 
