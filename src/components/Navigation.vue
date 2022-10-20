@@ -47,6 +47,8 @@
     <div class="user">
       <!-- i got annoyed by that fricking warn remove when adding user display -->
       <!-- <RouterLink to="/user"> -->
+
+      <div class="user-wrapper">
         <div class="user-icon">
           <div class="subtitle-1">{{name}}</div>
         </div>
@@ -64,6 +66,7 @@
             </sl-menu>
           </sl-dropdown>
         </div>
+      </div>
     </div>
   </section>
 </template>
@@ -203,6 +206,14 @@ sl-menu-item::part(base) {
 sl-dropdown::part(base) {
   cursor: pointer;
 }
+.user-wrapper {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
 
 
 

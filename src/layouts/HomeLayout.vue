@@ -18,7 +18,7 @@ import Desktop from "@/layouts/homeResponsive/desktop.vue";
 import {useMobileBreakpoint} from "@/compsables/useMobileBreakpoint";
 import Mobile from "@/layouts/homeResponsive/mobile.vue";
 
-const mobile = ref<boolean>(false)
+const mobile = ref<boolean>(true)
 onMounted(() => {
   mobile.value = useMobileBreakpoint(window)
 

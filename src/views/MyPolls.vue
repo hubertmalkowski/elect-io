@@ -14,7 +14,7 @@
       </div>
     </StaggeredGrid>
 
-    <h2 class="no-polls" v-if="testPolls.length === 0 && stagger">Niestety nie ma dostępnych sondaży do głosowania :(</h2>
+    <h2 class="no-polls" v-if="testPolls.length === 0 && stagger">Nie stworzyłeś jeszcze sondaży, zrób to <router-link to="/poll-add">tutaj</router-link> :(</h2>
 
   </div>
 </template>
