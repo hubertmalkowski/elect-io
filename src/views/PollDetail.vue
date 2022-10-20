@@ -120,16 +120,19 @@
                 No description.
             </span>
       </div>
-      <div class="button">
+      <div class="buttons">
         <sl-button @click="deactivate" variant="primary" outline size="large" pill v-if="isPriviliged && isActive">
           <span slot="prefix" class="material-symbols-outlined">toggle_on</span>Publiczna
         </sl-button>
         <sl-button @click="activate" variant="danger" outline size="large" pill v-else-if="isPriviliged && !isActive">
           <span slot="prefix" class="material-symbols-outlined">toggle_off</span>Niepubliczna
         </sl-button>
-        <sl-button variant="primary" @click="router.push(`/poll-edit/${pollID}`)" outline size="large" pill v-if="isPriviliged">Edytuj</sl-button>
-        <sl-button v-if="canVote" variant="primary" @click="router.push('/poll-vote/' + pollID)" size="large" pill>Głosuj</sl-button>
-        <sl-button v-else variant="primary" disabled size="large" pill>Głosuj</sl-button>
+
+        <div class="voteEdit">
+          <sl-button variant="primary" @click="router.push(`/poll-edit/${pollID}`)" outline size="large" pill v-if="isPriviliged">Edytuj</sl-button>
+          <sl-button v-if="canVote" variant="primary" @click="router.push('/poll-vote/' + pollID)" size="large" pill>Głosuj</sl-button>
+          <sl-button v-else variant="primary" disabled size="large" pill>Głosuj</sl-button>
+        </div>
       </div>
       <div class="chart" v-if="isPriviliged">
         <canvas ref="chart">
@@ -206,12 +209,18 @@
         object-fit: cover; */
     }
 
-    .button {
+    .buttons {
         display: flex;
         width: 100%;
-        gap: 10px;
-        justify-content:  flex-end;
+        gap: 5px;
+        justify-content:  space-between;
     }
+
+    .voteEdit {
+      display: flex;
+      gap: 5px
+    }
+
     .chart {
       width: 100%;
     }
