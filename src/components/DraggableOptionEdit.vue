@@ -1,6 +1,6 @@
 <template>
 
-  <draggable v-model="options"  item-key="id" :move="change()">
+  <draggable v-model="options"  item-key="id" :move="() => {change()}">
     <template #item="{element}">
       <div class="flex">
       <span class="material-symbols-outlined drag">
