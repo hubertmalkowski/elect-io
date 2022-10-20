@@ -1,6 +1,6 @@
 <template>
 
-  <div class="polls" ref="polls">
+  <div class="polls" ref="polls" :class="{'full-height' : !stagger}">
     <StaggeredGrid :stagger="stagger">
       <div class="" v-for="poll in testPolls">
         <Card
@@ -14,6 +14,8 @@
         />
       </div>
     </StaggeredGrid>
+
+    <h2 class="no-polls" v-if="testPolls.length === 0 && stagger">Niestety nie ma dostępnych sondaży do głosowania :(</h2>
 
   </div>
 
@@ -36,9 +38,7 @@ const stagger = ref(false)
 
 onMounted(async () => {
   //retrieve data
-  console.log("mounted")
   getAllPolls().then((polls) => {
-    console.log("fetched")
     testPolls.value = polls
   })
 })
@@ -74,12 +74,26 @@ watch(testPolls, (oldTestPolls, newTestPolls) => {
   display: flex;
   flex-direction: row;
   gap: 40px;
+  position: relative;
 }
 
 /*.polls {*/
 /*  max-width: 750px;*/
 /*}*/
 
+.no-polls {
+  color: var(--Color-Primary-500);
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 50%;
+  width: 100%;
+  margin:  30% auto ;
+}
+
+.full-height {
+  height: 100vh;
+}
 
 
 </style>

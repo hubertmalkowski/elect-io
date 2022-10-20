@@ -1,6 +1,6 @@
 <template>
-  <div class="polls">
-    <StaggeredGrid :stagger="stagger">
+  <div class="polls" :class="{'full-height' : !stagger}">
+    <StaggeredGrid :stagger="stagger" >
       <div class="" v-for="poll in testPolls">
         <Card
             :heading="poll.name"
@@ -13,6 +13,9 @@
         />
       </div>
     </StaggeredGrid>
+
+    <h2 class="no-polls" v-if="testPolls.length === 0 && stagger">Niestety nie ma dostępnych sondaży do głosowania :(</h2>
+
   </div>
 </template>
 
@@ -61,5 +64,9 @@
   display: flex;
   flex-direction: row;
   gap: 40px;
+}
+
+.full-height {
+  height: 100vh;
 }
 </style>

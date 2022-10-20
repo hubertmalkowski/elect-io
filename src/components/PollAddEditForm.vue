@@ -83,7 +83,6 @@ function submit() {
       type: ""}
   }
   else {
-    console.log("pierdolnbelo cie")
   }
 }
 

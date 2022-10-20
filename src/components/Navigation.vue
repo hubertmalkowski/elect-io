@@ -54,8 +54,7 @@
               settings
             </span>
             <sl-menu>
-              <sl-menu-item > <router-link to="/settings">Settings</router-link> </sl-menu-item>
-              <sl-divider></sl-divider>
+
               <sl-menu-item @click="signOut(auth)" class="sign-out"> Sign out </sl-menu-item>
             </sl-menu>
           </sl-dropdown>

@@ -41,11 +41,6 @@ const router = createRouter({
       component: History
     },
     {
-      path: '/settings',
-      name: 'settings',
-      component: Settings
-    },
-    {
       path: '/poll-detail/:id',
       name: 'poll-detail',
       component: PollDetail

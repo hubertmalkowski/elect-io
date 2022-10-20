@@ -47,7 +47,6 @@
                         options.forEach((option) => {
                             votes.value.push(option)
                         })
-                      console.log("bdfskja")
                       setupChart()
                     })
                 }

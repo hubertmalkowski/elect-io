@@ -37,9 +37,7 @@ import { getAllPollsFromHistory } from "@/queries/getAllPollsFromHistory";
   
   onMounted(async () => {
     //retrieve data
-    console.log("mounted")
     getAllPollsFromHistory().then((polls) => {
-      console.log("fetched")
       testPolls.value = polls
     })
   })

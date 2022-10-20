@@ -23,9 +23,7 @@ const isLoading = ref<boolean>(false)
 
 function f(test : any) {
   isLoading.value = true
-  console.log(test.options)
-  console.log(test.poll)
-  console.log(test.image)
+
 
   let options: any[] = []
 
