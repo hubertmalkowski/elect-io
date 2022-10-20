@@ -147,6 +147,12 @@ sl-spinner {
 
 }
 
+@media screen and (max-width: 960px) {
+  .container {
+    padding-right: 20px;
+  }
+}
+
 
 
 
