@@ -6,10 +6,20 @@
       search
     </span>
     </sl-input>
-    <div class="history"></div>
 
-    <!-- it's only temporary, shall be replaced with nice stuff -->
-    <span class="tempSpan" v-for="poll in polls">{{poll.name}} stworzona przez {{poll.creator}}</span>
+    <div class="history">
+      <div class="historyHeader">
+        <span class="body-small">Historia głosowania</span>
+        <span class="material-symbols-outlined">history</span>
+      </div>
+      <div class="historyItems">
+        <div class="historyItem" v-for="poll in polls">
+          <span>{{poll.name}}</span>
+          <span><router-link to="/">{{poll.creator}}</router-link></span>
+        </div>
+      </div>
+    </div>
+
   </div>
 
 
@@ -85,8 +95,21 @@ onMounted(() => {
   padding: 14px;
 }
 
-.tempSpan {
-  font-size: smaller;
+.history {
+  margin-left: 20px;
+  margin-right: 20px;
 }
-
+.historyHeader {
+  margin-top: 40px;
+  margin-bottom: 40px;
+  display: flex;
+  justify-content: space-between;
+}
+.historyItem {
+  display: flex;
+  flex-direction: column;
+  font-size: medium;
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
 </style>
