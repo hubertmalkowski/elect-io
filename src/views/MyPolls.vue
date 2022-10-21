@@ -7,7 +7,7 @@
             :creator-name="poll.creator"
             :description="poll.description"
             :img="poll.image"
-            action-label="chevron_right"
+            action-label="Więcej"
             class="item"
             @action="router.push('/poll-detail/'+poll.pollID)"
         />

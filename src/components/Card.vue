@@ -68,7 +68,7 @@ function action() {
       </span>
     </div>
     <div v-if="actionLabel != null" class="actionsWrapper">
-      <sl-button pill variant="primary" @click="action"><span class="material-symbols-outlined">{{ actionLabel }}</span></sl-button>
+      <sl-button pill variant="primary" @click="action">{{ actionLabel }}</sl-button>
     </div>
 
   </article>
