@@ -35,10 +35,23 @@
 <style scoped>
     sl-radio-group {
         border: none;
+        font-size: 2rem;
+    }
+
+    sl-radio::part(base) {
+      display: flex;
+      align-items: center;
+      margin: 1rem 0;
+
     }
 
     sl-radio::part(control) {
     --sl-color-primary-600: var(--Color-Primary-500);
-    --sl-color-primary-500: var(--Color-Primary-400)
+    --sl-color-primary-500: var(--Color-Primary-400);
+      --sl-toggle-size: 1.3rem;
+    }
+
+    sl-radio::part(label) {
+      font-size: 1.3rem;
     }
 </style>

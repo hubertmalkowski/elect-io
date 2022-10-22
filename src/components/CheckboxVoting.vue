@@ -37,7 +37,20 @@
     }
 
     sl-checkbox::part(control) {
-    --sl-color-primary-600: var(--Color-Primary-500);
-    --sl-color-primary-500: var(--Color-Primary-400)
+      --sl-color-primary-600: var(--Color-Primary-500);
+      --sl-color-primary-500: var(--Color-Primary-400);
+      --sl-toggle-size: 1.3rem;
+    }
+
+    sl-checkbox::part(base) {
+      display: flex;
+      align-items: center;
+      margin: 0.9rem 0;
+    }
+
+
+
+    sl-checkbox::part(label) {
+      font-size: 1.3rem;
     }
 </style>

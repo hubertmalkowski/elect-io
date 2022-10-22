@@ -103,7 +103,7 @@
 <template>
   <div class="wrapper">
 
-    <div class="detail">
+    <div class="detail" >
       <img :src="imageLink">
 
       <div class="headingWrapper" v-if="heading != ''">
