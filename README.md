@@ -8,3 +8,4 @@ Aplikacja Elect.io służy do tworzenia i przeprowadzania sondaży. Aktualna nie
 
 - Zdjęcie się nie wyświetla po dodaniu sondażu, trzeba odświeżyć by je zobaczyć
 - Nazwa użytkownika nie wyświetla się po zalogowaniu, trzeba odświeżyć by zobaczyć
+- brak walidacji po stronie klienta przy logowaniu i rejestracji
